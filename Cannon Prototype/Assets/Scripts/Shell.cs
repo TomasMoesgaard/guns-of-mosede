@@ -7,6 +7,8 @@ public class Shell : MonoBehaviour {
 
     private bool loaded = false;
 
+    public PhysicMaterial BounceMetal;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -15,7 +17,7 @@ public class Shell : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyUp(KeyCode.K) && !loaded)
+        if (Input.GetKeyUp(KeyCode.LeftShift) && !loaded)
         {
             GetComponent<Rigidbody>().isKinematic = false;
             GetComponent<Rigidbody>().useGravity = true;
@@ -27,15 +29,20 @@ public class Shell : MonoBehaviour {
     public void Eject()
     {
 
+        
+
         if (ShellLoad.CANNON_LOADED)
         {
-            ShellLoad.CANNON_LOADED = false;
+            //  ShellLoad.CANNON_LOADED = false;
+
+            StartCoroutine(ChangeLoadedStatus());
 
             GetComponent<Rigidbody>().isKinematic = false;
             GetComponent<Rigidbody>().useGravity = true;
             transform.parent = null;
 
-            GetComponent<Renderer>().enabled = true;
+           // GetComponent<Renderer>().enabled = true;
+           GetComponent<Collider>().enabled = true;
 
             loaded = false;
 
@@ -60,7 +67,10 @@ public class Shell : MonoBehaviour {
             GetComponent<Rigidbody>().useGravity = true;
             transform.parent = null;
 
-            GetComponent<Renderer>().enabled = true;
+          //  GetComponent<Renderer>().enabled = true;
+            GetComponent<Collider>().enabled = true;
+
+            GetComponent<CapsuleCollider>().material = BounceMetal;
 
             loaded = false;
         }
@@ -75,14 +85,26 @@ public class Shell : MonoBehaviour {
         loaded = true;
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<Collider>().enabled = false;
 
         transform.parent = rec;
 
         transform.position = rec.position;
         transform.rotation = rec.rotation;
 
-        GetComponent<Renderer>().enabled = false;
+     //   GetComponent<Renderer>().enabled = false;
 
     }
+
+    IEnumerator ChangeLoadedStatus()
+    {
+
+        yield return new WaitForSeconds(1);
+
+        ShellLoad.CANNON_LOADED = false;
+
+    }
+
+
 
 }

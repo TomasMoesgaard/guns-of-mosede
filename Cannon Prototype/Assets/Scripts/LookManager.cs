@@ -20,7 +20,7 @@ public class LookManager : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
 
 
@@ -66,23 +66,21 @@ public class LookManager : MonoBehaviour
 
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             RaycastHit hit2;
             if (Physics.Raycast(transform.position, transform.forward, out hit2))
             {
-                if (hit2.collider.tag == "Hatch")
+
+                Debug.Log(hit2.collider.tag);
+
+
+                if(hit2.collider.tag == "Handle")
                 {
 
-                    hit2.collider.GetComponent<HatchControl>().ActivateHatch();
+                   // Debug.Log("Got here!");
 
-                }
-
-
-                if (hit2.collider.tag == "Fire")
-                {
-
-                    hit2.collider.GetComponent<FireController>().FireCannon();
+                    hit2.collider.GetComponent<AnimationActivator>().Activate();
 
                 }
 

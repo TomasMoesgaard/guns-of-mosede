@@ -6,10 +6,15 @@ public class ShellLoad : MonoBehaviour {
 
     public static bool CANNON_LOADED = false;
 
+    public CannonAnimation ca;
+
 	// Use this for initialization
 	void Start () {
-	
-	}
+
+       // ca = GameObject.FindGameObjectWithTag("Animator").GetComponent<CannonAnimation>();
+
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,9 +30,13 @@ public class ShellLoad : MonoBehaviour {
 
             CANNON_LOADED = true;
 
+            ca.Animate("Insert");
+
         }
 
 
     }
+
+
 
 }
