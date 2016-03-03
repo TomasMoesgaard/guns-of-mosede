@@ -72,7 +72,7 @@ public class LookManager : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.forward, out hit2))
             {
 
-                Debug.Log(hit2.collider.tag);
+            //    Debug.Log(hit2.collider.tag);
 
 
                 if(hit2.collider.tag == "Handle")

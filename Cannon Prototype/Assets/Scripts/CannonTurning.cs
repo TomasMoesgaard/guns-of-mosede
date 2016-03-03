@@ -28,13 +28,13 @@ public class CannonTurning : MonoBehaviour {
 
        
 
-        ANGLE_TO_TARGET = Angle;
+      //  ANGLE_TO_TARGET = Angle;
 
         Vector3 targetDir = target.position - transform.position;
         Vector3 forward = new Vector3(-transform.right.x, 0f, -transform.right.z);
             
       
-        ANGLE_TO_TARGET = Vector3.Angle(targetDir, forward);
+        ANGLE_TO_TARGET = Vector3.Angle(targetDir, transform.right);
 
         DISTANCE_TO_TARGET = Vector3.Distance(transform.position, target.position);
 

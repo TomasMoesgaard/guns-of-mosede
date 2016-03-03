@@ -91,14 +91,14 @@ From this, equation (1) gives the maximum range:
     {
 
        if(Angle < 45f)
-        transform.Rotate(-3f * Time.deltaTime, 0f, 0f,  Space.Self);
+        transform.Rotate(-1f * Time.deltaTime, 0f, 0f,  Space.Self);
         // Wheel.transform.RotateAround(Wheel.transform.position, Vector3.right, 10f * Time.deltaTime);
     }
 
     public void TiltDown()
     {
        if (Angle > 1f)
-            transform.Rotate(3f * Time.deltaTime, 0f, 0f,  Space.Self);
+            transform.Rotate(1f * Time.deltaTime, 0f, 0f,  Space.Self);
         //heel.transform.Rotate(Wheel.transform.forward, -10f);
         //  Wheel.transform.RotateAround(Wheel.transform.position, Vector3.right, -10f * Time.deltaTime);
     }
