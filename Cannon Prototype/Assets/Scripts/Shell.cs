@@ -9,10 +9,18 @@ public class Shell : MonoBehaviour {
 
     public PhysicMaterial BounceMetal;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    public AudioClip SoundMetal;
+
+    public AudioClip SoundGround;
+
+    private AudioSource audio;
+
+    // Use this for initialization
+    void Start () {
+
+        audio = GetComponent<AudioSource>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -105,6 +113,26 @@ public class Shell : MonoBehaviour {
 
     }
 
+    void OnCollisionEnter(Collision col)
+    {
+
+        if(col.collider.tag == "Cannon")
+        {
+
+            audio.clip = SoundMetal;
+
+        }
+        else
+        {
+
+            audio.clip = SoundGround;
+
+        }
+
+
+        audio.Play();
+
+    }
 
 
 }

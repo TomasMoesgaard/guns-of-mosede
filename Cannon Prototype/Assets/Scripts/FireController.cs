@@ -5,7 +5,7 @@ public class FireController : MonoBehaviour {
 
     public ParticleSystem Blast;
 
-
+    public AudioSource Sound;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +27,8 @@ public class FireController : MonoBehaviour {
         if (ShellLoad.CANNON_LOADED)
         {
             Blast.Play();
+            Sound.Play();
+
             ShellLoad.CANNON_LOADED = false;
 
             Debug.Log(HitCheck());
