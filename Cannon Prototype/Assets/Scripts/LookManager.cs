@@ -20,7 +20,9 @@ public class LookManager : MonoBehaviour
 
         RaycastHit hit;
 
-        if (Input.GetKey(KeyCode.LeftShift))
+       // SteamVR_Controller.Input(1).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)
+
+        if (SteamVR_Controller.Input(1).GetPress(SteamVR_Controller.ButtonMask.Trigger))
         {
 
 
@@ -54,19 +56,19 @@ public class LookManager : MonoBehaviour
                     }
 
                 }
-
+                /*
                 if (hit.collider.tag == "Shell")
                 {
                     hit.collider.GetComponent<Rigidbody>().isKinematic = true;
                     hit.collider.GetComponent<Rigidbody>().useGravity = false;
                     hit.collider.transform.parent = transform;
                 }
-
+                */
             }
 
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (SteamVR_Controller.Input(1).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
         {
             RaycastHit hit2;
             if (Physics.Raycast(transform.position, transform.forward, out hit2))
