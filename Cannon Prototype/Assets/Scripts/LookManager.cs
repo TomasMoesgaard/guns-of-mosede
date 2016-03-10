@@ -22,7 +22,7 @@ public class LookManager : MonoBehaviour
 
        // SteamVR_Controller.Input(1).GetPressDown(SteamVR_Controller.ButtonMask.Trigger)
 
-        if (SteamVR_Controller.Input(1).GetPress(SteamVR_Controller.ButtonMask.Trigger))
+        if (SteamVR_Controller.Input(RightController.RIGHT_INDEX).GetPress(SteamVR_Controller.ButtonMask.Trigger))
         {
 
 
@@ -68,7 +68,7 @@ public class LookManager : MonoBehaviour
 
         }
 
-        if (SteamVR_Controller.Input(1).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+        if (SteamVR_Controller.Input(RightController.RIGHT_INDEX).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
         {
             RaycastHit hit2;
             if (Physics.Raycast(transform.position, transform.forward, out hit2))

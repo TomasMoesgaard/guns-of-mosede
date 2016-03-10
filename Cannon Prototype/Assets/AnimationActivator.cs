@@ -43,7 +43,7 @@ public class AnimationActivator : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Got here!");
+         //   Debug.Log("Got here!");
             if (ca.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(ActiveState[0]) || ca.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(ActiveState[1]) || ca.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(ActiveState[2]))
             {
                

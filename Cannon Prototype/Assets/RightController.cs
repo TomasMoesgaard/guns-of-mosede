@@ -3,10 +3,17 @@ using System.Collections;
 
 public class RightController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    public static int RIGHT_INDEX;
+
+    private int index;
+
+    // Use this for initialization
+    void Start () {
+
+        index = (int)GetComponent<SteamVR_TrackedObject>().index;
+
+        RIGHT_INDEX = index;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -16,10 +23,10 @@ public class RightController : MonoBehaviour {
     void OnTriggerStay(Collider col)
     {
 
-      
+        
 
 
-        if (SteamVR_Controller.Input(4).GetPress(SteamVR_Controller.ButtonMask.Trigger))
+        if (SteamVR_Controller.Input(index).GetPress(SteamVR_Controller.ButtonMask.Trigger))
         {
 
             if (col.tag == "RightTrigger")
@@ -51,7 +58,7 @@ public class RightController : MonoBehaviour {
             }
         }
 
-        if (SteamVR_Controller.Input(4).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+        if (SteamVR_Controller.Input(index).GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
         {
 
             if (col.tag == "Handle")
@@ -69,6 +76,16 @@ public class RightController : MonoBehaviour {
                     col.GetComponent<Rigidbody>().useGravity = false;
                     col.transform.parent = transform;
 
+            }
+
+        }
+
+        if (SteamVR_Controller.Input(index).GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
+        {
+
+            if(GetComponentInChildren<Shell>() != null)
+            {
+                GetComponentInChildren<Shell>().LetGo();
             }
 
         }

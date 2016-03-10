@@ -25,13 +25,6 @@ public class Shell : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (SteamVR_Controller.Input(4).GetPressUp(SteamVR_Controller.ButtonMask.Trigger) && !loaded)
-        {
-            GetComponent<Rigidbody>().isKinematic = false;
-            GetComponent<Rigidbody>().useGravity = true;
-            transform.parent = null;
-        }
-
 	}
 
     public void Eject()
@@ -134,5 +127,14 @@ public class Shell : MonoBehaviour {
 
     }
 
+    public void LetGo()
+    {
+        if (!loaded)
+        {
+            GetComponent<Rigidbody>().isKinematic = false;
+            GetComponent<Rigidbody>().useGravity = true;
+            transform.parent = null;
+        }
+    }
 
 }

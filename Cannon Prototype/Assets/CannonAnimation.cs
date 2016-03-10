@@ -23,14 +23,41 @@ public class CannonAnimation : MonoBehaviour {
 
     public void Animate(string s)
     {
-       // Debug.Log("PLays");
+        // Debug.Log("PLays");
+        /*
+        anim.ResetTrigger("Insert");
+        anim.ResetTrigger("Fire");
+        anim.ResetTrigger("Close");
+        anim.ResetTrigger("Open");
+        anim.ResetTrigger("Extract");
+        anim.ResetTrigger("Release");
+        */
+        if (s == "Insert")
+        {
+            anim.ResetTrigger("Fire");
+            anim.ResetTrigger("Close");
+            anim.ResetTrigger("Open");
+            anim.ResetTrigger("Extract");
+            anim.ResetTrigger("Release");
+        }
+
+        if (s == "Release")
+        {
+            anim.ResetTrigger("Open");
+        }
+
+        if (s == "Close")
+        {
+            anim.ResetTrigger("Fire");
+        }
+
         anim.SetTrigger(s);
 
     }
 
     public void ReleaseShell()
     {
-
+        if(GetComponentInChildren<Shell>() != null)
         GetComponentInChildren<Shell>().Eject();
 
     }
