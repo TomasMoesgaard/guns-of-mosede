@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class FireController : MonoBehaviour {
 
     public ParticleSystem Blast;
 
     public AudioSource Sound;
+
+    public Text text;
 
 	// Use this for initialization
 	void Start () {
@@ -31,7 +34,8 @@ public class FireController : MonoBehaviour {
 
             ShellLoad.CANNON_LOADED = false;
 
-            Debug.Log(HitCheck());
+            StartCoroutine(HitMessage());
+
         }
 
        
@@ -54,6 +58,27 @@ public class FireController : MonoBehaviour {
         Debug.Log("Distance: " + CannonTilting.RANGE_DIFFERENCE + "  Angle: " + CannonTurning.ANGLE_TO_TARGET);
 
         return hit;
+
+    }
+
+    IEnumerator HitMessage()
+    {
+
+        if (HitCheck())
+        {
+
+            text.text = "HIT";
+
+        }
+        else
+        {
+            text.text = "MISS";
+        }
+
+        yield return new WaitForSeconds(3);
+
+        text.text = "";
+
 
     }
 

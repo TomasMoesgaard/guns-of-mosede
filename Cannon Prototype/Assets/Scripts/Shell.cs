@@ -20,6 +20,8 @@ public class Shell : MonoBehaviour {
 
         audio = GetComponent<AudioSource>();
 
+        StartCoroutine(TurnOnAudio());
+
     }
 	
 	// Update is called once per frame
@@ -58,7 +60,17 @@ public class Shell : MonoBehaviour {
             {
                 if(r.transform.tag == "Payload")
                 {
-                   r.GetComponent<Renderer>().enabled = false;
+                   r.enabled = false;
+                }
+            }
+
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+
+            foreach (Collider c in colliders)
+            {
+                if (c.transform.tag == "Payload")
+                {
+                    c.enabled = false;
                 }
             }
 
@@ -135,6 +147,15 @@ public class Shell : MonoBehaviour {
             GetComponent<Rigidbody>().useGravity = true;
             transform.parent = null;
         }
+    }
+
+    IEnumerator TurnOnAudio()
+    {
+
+        yield return new WaitForSeconds(2);
+
+        GetComponent<AudioSource>().enabled = true;
+
     }
 
 }

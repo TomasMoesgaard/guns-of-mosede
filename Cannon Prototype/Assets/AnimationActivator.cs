@@ -7,12 +7,14 @@ public class AnimationActivator : MonoBehaviour {
 
     public string[] ActiveState;
 
-    private GameObject ca;
+    private CannonAnimation ca;
 
 	// Use this for initialization
 	void Start () {
 
-        ca = GameObject.FindGameObjectWithTag("Cannon");
+        ca = GetComponentInParent<CannonAnimation>();
+
+        //ca = GameObject.FindGameObjectWithTag("Cannon");
 
 	}
 	
@@ -27,7 +29,10 @@ public class AnimationActivator : MonoBehaviour {
     public void Activate()
     {
 
-        if(ActiveState.Length == 1)
+        ca.Animate(Trigger[0]);
+
+        /*
+        if (ActiveState.Length == 1)
         {
             if (ca.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(ActiveState[0]))
             {
@@ -46,21 +51,18 @@ public class AnimationActivator : MonoBehaviour {
          //   Debug.Log("Got here!");
             if (ca.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(ActiveState[0]) || ca.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(ActiveState[1]) || ca.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(ActiveState[2]))
             {
-               
                 ca.GetComponent<CannonAnimation>().Animate(Trigger[0]);
             }
 
         }
-
-
-
+        /*
         if(Trigger.Length == 2)
         {
             string s = Trigger[0];
             Trigger[0] = Trigger[1];
             Trigger[1] = s;
         }
-
+        */
     }
 
 }
