@@ -10,6 +10,8 @@ public class FireController : MonoBehaviour {
 
     public Text text;
 
+    public GameObject HitObject;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -35,6 +37,8 @@ public class FireController : MonoBehaviour {
             ShellLoad.CANNON_LOADED = false;
 
             StartCoroutine(HitMessage());
+
+           // HitObject.transform.localPosition = new Vector3(CannonTilting.RANGE, 0f, 0f);
 
         }
 

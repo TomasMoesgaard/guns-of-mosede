@@ -10,6 +10,8 @@ public class CannonTilting : MonoBehaviour {
 
     public static float RANGE_DIFFERENCE = 0;
 
+    public static float RANGE = 0;
+
     public float MuzzleVelocity = 280f;
 
     private float range;
@@ -74,9 +76,11 @@ From this, equation (1) gives the maximum range:
 
         range = RangeCalculation(1f, MuzzleVelocity, Angle);
 
-       // Debug.Log(Angle);
+        // Debug.Log(Angle);
 
-      //  Debug.Log(range);
+        //  Debug.Log(range);
+
+        RANGE = range;
 
         RANGE_DIFFERENCE = Mathf.Abs(range - CannonTurning.DISTANCE_TO_TARGET);
 

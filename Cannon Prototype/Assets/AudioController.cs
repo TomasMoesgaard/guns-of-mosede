@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class AudioController : MonoBehaviour {
 
@@ -14,6 +15,18 @@ public class AudioController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+
+            ShellLoad.CANNON_LOADED = false;
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+
+
+        }
+
 	
 	}
 

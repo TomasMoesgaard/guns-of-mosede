@@ -23,7 +23,13 @@ public class RightController : MonoBehaviour {
     void OnTriggerStay(Collider col)
     {
 
-        
+        if(col.tag == "Arrow")
+        {
+
+          //  col.GetComponent<TurnArrow>().Rotate();
+
+        }
+
 
 
         if (SteamVR_Controller.Input(index).GetPress(SteamVR_Controller.ButtonMask.Trigger))
@@ -32,13 +38,13 @@ public class RightController : MonoBehaviour {
             if (col.tag == "RightTrigger")
             {
 
-                if (col.transform.GetComponentInParent<CrankControl>().Tilt)
+                if (col.transform.parent.GetComponent<CrankControl>().Tilt)
                 {
-                    col.transform.GetComponentInParent<CrankControl>().TiltDown();
+                    col.transform.parent.GetComponent<CrankControl>().TiltDown();
                 }
                 else
                 {
-                    col.transform.GetComponentInParent<CrankControl>().TurnRight();
+                    col.transform.parent.GetComponent<CrankControl>().TurnRight();
                 }
 
             }
@@ -46,13 +52,13 @@ public class RightController : MonoBehaviour {
             if (col.tag == "LeftTrigger")
             {
 
-                if (col.transform.GetComponentInParent<CrankControl>().Tilt)
+                if (col.transform.parent.GetComponent<CrankControl>().Tilt)
                 {
-                    col.transform.GetComponentInParent<CrankControl>().TiltUp();
+                    col.transform.parent.GetComponent<CrankControl>().TiltUp();
                 }
                 else
                 {
-                    col.transform.GetComponentInParent<CrankControl>().TurnLeft();
+                    col.transform.parent.GetComponent<CrankControl>().TurnLeft();
                 }
 
             }
@@ -70,12 +76,9 @@ public class RightController : MonoBehaviour {
 
             if (col.tag == "Shell")
             {
-
-
                     col.GetComponent<Rigidbody>().isKinematic = true;
                     col.GetComponent<Rigidbody>().useGravity = false;
                     col.transform.parent = transform;
-
             }
 
         }

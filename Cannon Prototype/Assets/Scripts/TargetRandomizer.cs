@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TargetRandomizer : MonoBehaviour {
 
@@ -12,28 +13,33 @@ public class TargetRandomizer : MonoBehaviour {
     public Transform langagergaard;
     public Transform søhøj;
 
-
+    public Text TargetText;
     // Use this for initialization
     void Start () {
 
         TargetLocation = RandomLocation();
 
-
         switch (TargetLocation)
         {
             case Location.Agergaard:
                 transform.position = agergaard.position;
+                TargetText.text = "Target: Agergaard";
                 break;
             case Location.Himmelbjerg:
                 transform.position = himmebjærg.position;
+                TargetText.text = "Target: Himmelbjærg";
                 break;
             case Location.Langagergaard:
                 transform.position = langagergaard.position;
+                TargetText.text = "Target: Langagergaard";
                 break;
             case Location.Søhøj:
                 transform.position = søhøj.position;
+                TargetText.text = "Target: Søhøj";
                 break;
         }
+
+
 
         //transform.position = new Vector3(Random.Range(-500, -7000), 0f, Random.Range(7000, -7000));
 
