@@ -14,6 +14,8 @@ public class CannonTurning : MonoBehaviour {
 
     private Transform target;
 
+    public Transform North;
+
 	// Use this for initialization
 	void Start () {
 
@@ -24,21 +26,15 @@ public class CannonTurning : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Angle = transform.localEulerAngles.x;
-
-       
-
-      //  ANGLE_TO_TARGET = Angle;
-
         Vector3 targetDir = target.position - transform.position;
-        Vector3 forward = new Vector3(-transform.right.x, 0f, -transform.right.z);
-            
-      
-        ANGLE_TO_TARGET = Vector3.Angle(targetDir, transform.right);
+        
+        Vector3 northDir = North.position - transform.position;
+
+        Angle = Utility.SignedAngleBetween(-transform.right, northDir, transform.up);
+
+        ANGLE_TO_TARGET = Utility.SignedAngleBetween(targetDir, -transform.right, transform.up);
 
         DISTANCE_TO_TARGET = Vector3.Distance(transform.position, target.position);
-
-        //AngleText.text = "Angle: " + ANGLE_TO_TARGET.ToString("F2");
 
         AngleText.text = Angle.ToString("F2");
 

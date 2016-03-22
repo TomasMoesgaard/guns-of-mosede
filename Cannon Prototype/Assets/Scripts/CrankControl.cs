@@ -16,7 +16,9 @@ public class CrankControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+
+
 	}
 
 
@@ -47,4 +49,5 @@ public class CrankControl : MonoBehaviour {
         Wheel.transform.Rotate(0f, 0f, 100f * Time.deltaTime, Space.Self);
         ObjectToControl.GetComponent<CannonTilting>().TiltDown();
     }
+
 }
