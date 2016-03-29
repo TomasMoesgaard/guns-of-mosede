@@ -43,9 +43,14 @@ public class Shell : MonoBehaviour {
             GetComponent<Rigidbody>().isKinematic = false;
             GetComponent<Rigidbody>().useGravity = true;
             transform.parent = null;
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            // GetComponent<Renderer>().enabled = true;
+            foreach (Collider c in colliders)
+            {
 
-           // GetComponent<Renderer>().enabled = true;
-           GetComponent<Collider>().enabled = true;
+                    c.enabled = true;
+
+            }
 
             loaded = false;
 
@@ -74,6 +79,14 @@ public class Shell : MonoBehaviour {
                 }
             }
 
+            foreach (Collider c in colliders)
+            {
+                if (c.transform.tag == "Shell")
+                {
+                    c.enabled = true;
+                }
+            }
+
             GetComponent<ParticleSystem>().Play();
 
             GetComponent<Rigidbody>().isKinematic = false;
@@ -81,7 +94,7 @@ public class Shell : MonoBehaviour {
             transform.parent = null;
 
           //  GetComponent<Renderer>().enabled = true;
-            GetComponent<Collider>().enabled = true;
+         //   GetComponent<Collider>().enabled = true;
 
             GetComponent<CapsuleCollider>().material = BounceMetal;
 
@@ -98,7 +111,16 @@ public class Shell : MonoBehaviour {
         loaded = true;
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<Collider>().enabled = false;
+
+
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+
+        foreach (Collider c in colliders)
+        {
+
+                c.enabled = false;
+
+        }
 
         transform.parent = rec;
 

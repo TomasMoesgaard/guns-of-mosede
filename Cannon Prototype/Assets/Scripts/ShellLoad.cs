@@ -6,7 +6,9 @@ public class ShellLoad : MonoBehaviour {
 
     public static bool CANNON_LOADED = false;
 
-    public CannonAnimation ca;
+    public Animator ca;
+
+    private Shell loadedShell;
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +21,7 @@ public class ShellLoad : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
+        GetComponent<CapsuleCollider>().enabled = HatchControl.HATCH_OPEN;
 	
 	}
 
@@ -28,13 +30,32 @@ public class ShellLoad : MonoBehaviour {
         if(col.tag == "Shell" && !col.GetComponent<Shell>().HaveBeenFired && !CANNON_LOADED)
         {
 
+            loadedShell = col.GetComponent<Shell>();
+
             col.GetComponent<Shell>().Load(transform);
 
             CANNON_LOADED = true;
 
-            ca.Animate("Insert");
+            ca.SetTrigger("Shell");
 
         }
+
+
+    }
+
+    public void Eject()
+    {
+
+        if (loadedShell != null)
+        {
+
+            loadedShell.Eject();
+
+
+            loadedShell = null;
+
+        }
+
 
 
     }

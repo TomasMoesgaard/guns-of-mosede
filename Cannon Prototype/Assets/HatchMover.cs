@@ -17,9 +17,11 @@ public class HatchMover : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log(startPosistion);
+       // Debug.Log(Utility.MapRange(Handle.angle, 0f, -90f, 0f, 0.3f));
 
-        transform.localPosition = new Vector3(Utility.MapRange(Handle.angle, 0f, -90f, 0f, 0.3f), 0, 0);
+
+
+        transform.localPosition = startPosistion + new Vector3(Utility.MapRange(Handle.angle, 0f, -90f, 0f, -0.31f), 0, 0);
 
 	}
 }
