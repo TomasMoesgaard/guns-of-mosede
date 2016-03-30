@@ -5,7 +5,11 @@ public class HatchControl : MonoBehaviour {
 
     public static bool HATCH_OPEN = true;
 
+    public static bool HATCH_FULLY_OPEN = true;
+
     public static bool HATCH_LOCKED = false;
+
+    public static bool SHELL_CONTAINED = false;
 
     public Collider ShellReceptical;
 
@@ -24,20 +28,43 @@ public class HatchControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(joint.angle > -5)
+
+
+        if (joint.angle > -89)
+        {
+            HATCH_OPEN = true;
+        }
+
+
+        if (joint.angle > -5)
         {
 
-            HATCH_OPEN = true;
+            HATCH_FULLY_OPEN = true;
 
-            sl.Eject();
+            if (SHELL_CONTAINED)
+            {
 
+                sl.Eject();
+
+                SHELL_CONTAINED = false;
+            }
+    
         }
+        else
+        {
+            HATCH_FULLY_OPEN = false;
+        }
+
 
         if(HATCH_OPEN && joint.angle < -89)
         {
 
             Lock();
 
+            if(sl.loadedShell != null)
+            {
+                SHELL_CONTAINED = true;
+            }
 
         }
 
@@ -70,46 +97,4 @@ public class HatchControl : MonoBehaviour {
 
         }
     }
-
-    /*
-
-    public void ActivateHatch()
-    {
-        if (HatchOpen)
-        {
-            GetComponent<Animator>().SetTrigger("Close");
-           // HatchOpen = false;
-            StartCoroutine(disableCollider());
-        }
-        else
-        {
-            GetComponent<Animator>().SetTrigger("Open");
-            //HatchOpen = true;
-            StartCoroutine(disableCollider());
-
-            if (ShellReceptical.gameObject.GetComponentInChildren<Shell>() != null)
-            {
-                ShellReceptical.gameObject.GetComponentInChildren<Shell>().Eject();
-            }
-
-        }
-
-
-    }
-
-    IEnumerator disableCollider()
-    {
-
-
-        GetComponent<Collider>().enabled = false;
-
-        yield return new WaitForFixedUpdate();
-
-        yield return new WaitUntil(() => GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 0.98);
-
-        GetComponent<Collider>().enabled = true;
-
-        HatchOpen = !HatchOpen;
-    }
-    */
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using NewtonVR;
 
 public class Shell : MonoBehaviour {
 
@@ -13,12 +14,12 @@ public class Shell : MonoBehaviour {
 
     public AudioClip SoundGround;
 
-    private AudioSource audio;
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start () {
 
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         StartCoroutine(TurnOnAudio());
 
@@ -29,86 +30,9 @@ public class Shell : MonoBehaviour {
 
 	}
 
-    public void Eject()
+    public void LoadShell(Transform rec)
     {
 
-        
-
-        if (ShellLoad.CANNON_LOADED)
-        {
-            //  ShellLoad.CANNON_LOADED = false;
-
-            StartCoroutine(ChangeLoadedStatus());
-
-            GetComponent<Rigidbody>().isKinematic = false;
-            GetComponent<Rigidbody>().useGravity = true;
-            transform.parent = null;
-            Collider[] colliders = GetComponentsInChildren<Collider>();
-            // GetComponent<Renderer>().enabled = true;
-            foreach (Collider c in colliders)
-            {
-
-                    c.enabled = true;
-
-            }
-
-            loaded = false;
-
-        }
-        else
-        {
-            HaveBeenFired = true;
-
-            Renderer[] renderers = GetComponentsInChildren<Renderer>();
-
-            foreach (Renderer r in renderers)
-            {
-                if(r.transform.tag == "Payload")
-                {
-                   r.enabled = false;
-                }
-            }
-
-            Collider[] colliders = GetComponentsInChildren<Collider>();
-
-            foreach (Collider c in colliders)
-            {
-                if (c.transform.tag == "Payload")
-                {
-                    c.enabled = false;
-                }
-            }
-
-            foreach (Collider c in colliders)
-            {
-                if (c.transform.tag == "Shell")
-                {
-                    c.enabled = true;
-                }
-            }
-
-            GetComponent<ParticleSystem>().Play();
-
-            GetComponent<Rigidbody>().isKinematic = false;
-            GetComponent<Rigidbody>().useGravity = true;
-            transform.parent = null;
-
-          //  GetComponent<Renderer>().enabled = true;
-         //   GetComponent<Collider>().enabled = true;
-
-            GetComponent<CapsuleCollider>().material = BounceMetal;
-
-            loaded = false;
-        }
-
-
-
-    }
-
-    public void Load(Transform rec)
-    {
-
-        loaded = true;
         GetComponent<Rigidbody>().isKinematic = true;
         GetComponent<Rigidbody>().useGravity = false;
 
@@ -118,7 +42,7 @@ public class Shell : MonoBehaviour {
         foreach (Collider c in colliders)
         {
 
-                c.enabled = false;
+            c.enabled = false;
 
         }
 
@@ -127,16 +51,34 @@ public class Shell : MonoBehaviour {
         transform.position = rec.position;
         transform.rotation = rec.rotation;
 
-     //   GetComponent<Renderer>().enabled = false;
+        GetComponent<NVRInteractableItem>().enabled = false;
 
     }
 
-    IEnumerator ChangeLoadedStatus()
+    public void FireShell()
     {
 
-        yield return new WaitForSeconds(1);
+        Destroy(transform.GetChild(0).gameObject);
 
-        ShellLoad.CANNON_LOADED = false;
+        transform.tag = "SpentShell";
+
+    }
+
+    public void UnloadShell()
+    {
+
+        StartCoroutine(DelayUnload());
+
+    }
+
+    IEnumerator ChangeTag()
+    {
+
+        tag = "UnspentShell";
+
+        yield return new WaitForSeconds(2f);
+
+        tag = "Shell";
 
     }
 
@@ -146,18 +88,18 @@ public class Shell : MonoBehaviour {
         if(col.collider.tag == "Cannon")
         {
 
-            audio.clip = SoundMetal;
+            audioSource.clip = SoundMetal;
 
         }
         else
         {
 
-            audio.clip = SoundGround;
+            audioSource.clip = SoundGround;
 
         }
 
 
-        audio.Play();
+        audioSource.Play();
 
     }
 
@@ -180,4 +122,34 @@ public class Shell : MonoBehaviour {
 
     }
 
+    IEnumerator DelayUnload()
+    {
+
+
+        if (tag == "Shell")
+        {
+
+            StartCoroutine(ChangeTag());
+
+        }
+
+        yield return new WaitForSeconds(0.8f);
+
+        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<Rigidbody>().useGravity = true;
+
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+
+        foreach (Collider c in colliders)
+        {
+
+            c.enabled = true;
+
+        }
+
+        GetComponent<NVRInteractableItem>().enabled = true;
+
+        transform.parent = null;
+
+    }
 }

@@ -19,11 +19,11 @@ public class AudioController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R))
         {
 
-            ShellLoad.CANNON_LOADED = false;
+         //   ShellLoad.CANNON_LOADED = false;
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+           // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-
+            SteamVR_LoadLevel.Begin("1");
 
         }
 

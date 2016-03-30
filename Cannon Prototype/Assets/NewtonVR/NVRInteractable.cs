@@ -41,6 +41,13 @@ namespace NewtonVR
             Colliders = this.GetComponentsInChildren<Collider>();
         }
 
+        //Added this to remove destroyed colliders from Colliders
+        protected virtual void OnEnable()
+        {
+
+            Colliders = this.GetComponentsInChildren<Collider>();
+        }
+
         protected virtual void Start()
         {
             NVRInteractables.Register(this, Colliders);

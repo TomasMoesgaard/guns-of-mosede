@@ -9,6 +9,8 @@ public class CannonTrigger : MonoBehaviour {
 
     public FireController fc;
 
+    public Transform Hammer;
+
 	// Use this for initialization
 	void Start () {
 
@@ -21,7 +23,7 @@ public class CannonTrigger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-        if(transform.localPosition.z < transform.localPosition.z - joint.linearLimit.limit + 0.005f)
+        if(Vector3.Distance(transform.position, Hammer.position) > 0.1f)
         {
 
             fc.FireCannon();

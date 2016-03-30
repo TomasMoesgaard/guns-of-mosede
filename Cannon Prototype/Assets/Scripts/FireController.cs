@@ -12,6 +12,8 @@ public class FireController : MonoBehaviour {
 
     public GameObject HitObject;
 
+    public ShellLoad SL;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -29,12 +31,14 @@ public class FireController : MonoBehaviour {
     public void FireCannon()
     {
 
-        if (ShellLoad.CANNON_LOADED)
+        if (ShellLoad.CANNON_LOADED && HatchControl.HATCH_LOCKED)
         {
             Blast.Play();
             Sound.Play();
 
             ShellLoad.CANNON_LOADED = false;
+
+            SL.loadedShell.FireShell();
 
             StartCoroutine(HitMessage());
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using NewtonVR;
 
 public class ShellLoad : MonoBehaviour {
 
@@ -8,7 +9,7 @@ public class ShellLoad : MonoBehaviour {
 
     public Animator ca;
 
-    private Shell loadedShell;
+    public Shell loadedShell;
 
 	// Use this for initialization
 	void Start () {
@@ -21,22 +22,29 @@ public class ShellLoad : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        GetComponent<CapsuleCollider>().enabled = HatchControl.HATCH_OPEN;
 	
 	}
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.tag == "Shell" && !col.GetComponent<Shell>().HaveBeenFired && !CANNON_LOADED)
+        if(col.tag == "Shell" && loadedShell == null && HatchControl.HATCH_FULLY_OPEN)
         {
 
             loadedShell = col.GetComponent<Shell>();
 
-            col.GetComponent<Shell>().Load(transform);
+            col.GetComponent<Shell>().LoadShell(transform);
 
             CANNON_LOADED = true;
 
             ca.SetTrigger("Shell");
+
+            if (loadedShell.GetComponent<NVRInteractableItem>().AttachedHand != null)
+            {
+
+                loadedShell.GetComponent<NVRInteractableItem>().AttachedHand.EndInteraction(loadedShell.GetComponent<NVRInteractableItem>());
+
+            }
+           // GetComponent<CapsuleCollider>().enabled = false;
 
         }
 
@@ -48,12 +56,14 @@ public class ShellLoad : MonoBehaviour {
 
         if (loadedShell != null)
         {
+            CANNON_LOADED = false;
 
-            loadedShell.Eject();
+            loadedShell.UnloadShell();
+
+            ca.SetTrigger("Shell");
 
 
             loadedShell = null;
-
         }
 
 
