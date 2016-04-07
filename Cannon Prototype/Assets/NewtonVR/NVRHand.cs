@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Leap.Unity.PinchUtility;
 
 namespace NewtonVR
 {
@@ -47,6 +48,12 @@ namespace NewtonVR
 
         private bool RenderModelInitialized = false;
 
+        public bool UsesCustomModel = false;
+
+        public bool IsALeapHand = false;
+
+        private LeapPinchDetector lpd;
+
         public bool IsHovering
         {
             get
@@ -75,75 +82,146 @@ namespace NewtonVR
             VisibilityLocked = false;
 
             SteamVR_Utils.Event.Listen("render_model_loaded", RenderModelLoaded);
+
+            lpd = GetComponent<LeapPinchDetector>();
         }
 
-        private void Update()
+        protected void Update()
         {
-            if (Controller == null || CurrentHandState == HandState.Uninitialized)
-                return;
-
-            HoldButtonPressed = Controller.GetPress(HoldButton);
-            HoldButtonDown = Controller.GetPressDown(HoldButton);
-            HoldButtonUp = Controller.GetPressUp(HoldButton);
-
-            UseButtonPressed = Controller.GetPress(UseButton);
-            UseButtonDown = Controller.GetPressDown(UseButton);
-            UseButtonUp = Controller.GetPressUp(UseButton);
-
-            if (HoldButtonUp)
+            if (!IsALeapHand)
             {
-                VisibilityLocked = false;
-            }
+                if (Controller == null || CurrentHandState == HandState.Uninitialized)
+                    return;
 
-            if (HoldButtonDown == true)
-            {
-                if (CurrentlyInteracting == null)
+
+
+                HoldButtonPressed = Controller.GetPress(HoldButton);
+                HoldButtonDown = Controller.GetPressDown(HoldButton);
+                HoldButtonUp = Controller.GetPressUp(HoldButton);
+
+                UseButtonPressed = Controller.GetPress(UseButton);
+                UseButtonDown = Controller.GetPressDown(UseButton);
+                UseButtonUp = Controller.GetPressUp(UseButton);
+
+                if (HoldButtonUp)
                 {
-                    PickupClosest();
+                    VisibilityLocked = false;
+                }
+
+                if (HoldButtonDown == true)
+                {
+                    if (CurrentlyInteracting == null)
+                    {
+                        PickupClosest();
+                    }
+                }
+                else if (HoldButtonUp == true && CurrentlyInteracting != null)
+                {
+                    EndInteraction(null);
+                }
+
+                if (IsInteracting == true)
+                {
+                    CurrentlyInteracting.InteractingUpdate(this);
+                }
+
+                if (NVRPlayer.Instance.PhysicalHands == true)
+                {
+                    UpdateVisibilityAndColliders();
                 }
             }
-            else if (HoldButtonUp == true && CurrentlyInteracting != null)
+            else
             {
-                EndInteraction(null);
-            }
 
-            if (IsInteracting == true)
-            {
-                CurrentlyInteracting.InteractingUpdate(this);
-            }
 
-            if (NVRPlayer.Instance.PhysicalHands == true)
-            {
-                UpdateVisibilityAndColliders();
+                HoldButtonPressed = lpd.DidStartPinch;
+                HoldButtonDown = lpd.IsPinching;
+                HoldButtonUp = lpd.DidEndPinch;
+
+                if (HoldButtonDown == true)
+                {
+                    if (CurrentlyInteracting == null)
+                    {
+                        PickupClosest();
+                    }
+                }
+                else if (HoldButtonUp == true && CurrentlyInteracting != null)
+                {
+                    EndInteraction(null);
+                }
+
+                if (IsInteracting == true)
+                {
+                    CurrentlyInteracting.InteractingUpdate(this);
+                }
+
+                if (NVRPlayer.Instance.PhysicalHands == true)
+                {
+                    UpdateVisibilityAndColliders();
+                }
+
             }
         }
 
         private void UpdateVisibilityAndColliders()
         {
-            if (HoldButtonPressed == true && IsInteracting == false)
+            if (IsALeapHand)
             {
-                if (CurrentHandState != HandState.GripDownNotInteracting && VisibilityLocked == false)
+                if (HoldButtonPressed == true && IsInteracting == false)
                 {
-                    VisibilityLocked = true;
-                    SetVisibility(VisibilityLevel.Visible);
-                    CurrentHandState = HandState.GripDownNotInteracting;
+                    if (CurrentHandState != HandState.GripDownNotInteracting && VisibilityLocked == false)
+                    {
+                        VisibilityLocked = true;
+                      //  SetVisibility(VisibilityLevel.Visible);
+                        CurrentHandState = HandState.GripDownNotInteracting;
+                    }
                 }
-            }
-            else if (HoldButtonDown == true && IsInteracting == true)
-            {
-                if (CurrentHandState != HandState.GripDownInteracting && VisibilityLocked == false)
+                else if (HoldButtonDown == true && IsInteracting == true)
                 {
-                    VisibilityLocked = true;
-                    SetVisibility(VisibilityLevel.Ghost);
-                    CurrentHandState = HandState.GripDownInteracting;
+                    if (CurrentHandState != HandState.GripDownInteracting && VisibilityLocked == false)
+                    {
+                        VisibilityLocked = true;
+                    //    SetVisibility(VisibilityLevel.Ghost);
+                        CurrentHandState = HandState.GripDownInteracting;
+                    }
                 }
-            }
-            else if (IsInteracting == false)
-            {
-                if (CurrentHandState != HandState.Idle && VisibilityLocked == false)
+                else if (IsInteracting == false)
                 {
-                    SetVisibility(VisibilityLevel.Ghost);
-                    CurrentHandState = HandState.Idle;
+                    if (CurrentHandState != HandState.Idle && VisibilityLocked == false)
+                    {
+                     //   SetVisibility(VisibilityLevel.Ghost);
+                        CurrentHandState = HandState.Idle;
+                    }
+                }
+
+
+            }
+            else {
+                if (HoldButtonPressed == true && IsInteracting == false)
+                {
+                    if (CurrentHandState != HandState.GripDownNotInteracting && VisibilityLocked == false)
+                    {
+                        VisibilityLocked = true;
+                        SetVisibility(VisibilityLevel.Visible);
+                        CurrentHandState = HandState.GripDownNotInteracting;
+                    }
+                }
+                else if (HoldButtonDown == true && IsInteracting == true)
+                {
+                    if (CurrentHandState != HandState.GripDownInteracting && VisibilityLocked == false)
+                    {
+                        VisibilityLocked = true;
+                        SetVisibility(VisibilityLevel.Ghost);
+                        CurrentHandState = HandState.GripDownInteracting;
+                    }
+                }
+                else if (IsInteracting == false)
+                {
+                    if (CurrentHandState != HandState.Idle && VisibilityLocked == false)
+                    {
+                        SetVisibility(VisibilityLevel.Ghost);
+                        CurrentHandState = HandState.Idle;
+                    }
                 }
             }
         }
@@ -383,9 +461,11 @@ namespace NewtonVR
         private IEnumerator DoInitialize()
         {
             Debug.Log("DoInitialize() on " + this.name);
-            
-            while (RenderModelInitialized == false)
-                yield return null; //wait for render model to be initialized
+
+            //  while (RenderModelInitialized == false)
+            //     yield return null; //wait for render model to be initialized
+
+            yield return new WaitForEndOfFrame(); 
 
             Rigidbody = this.GetComponent<Rigidbody>();
             if (Rigidbody == null)
@@ -395,59 +475,77 @@ namespace NewtonVR
             Collider[] Colliders = null;
 
             string controllerModel = GetDeviceName();
-            switch (controllerModel)
+
+            if (UsesCustomModel)
             {
-                case "vr_controller_05_wireless_b":
-                    Transform dk1Trackhat = this.transform.FindChild("trackhat");
-                    if (dk1Trackhat == null)
-                    {
-                        // Dk1 controller model has trackhat
-                    }
-                    else
-                    {
-                        dk1Trackhat.gameObject.SetActive(true);
-                    }
 
-                    SphereCollider dk1TrackhatCollider = dk1Trackhat.gameObject.GetComponent<SphereCollider>();
-                    if (dk1TrackhatCollider == null)
-                    {
-                        dk1TrackhatCollider = dk1Trackhat.gameObject.AddComponent<SphereCollider>();
-                        dk1TrackhatCollider.isTrigger = true;
-                    }
 
-                    Colliders = new Collider[] { dk1TrackhatCollider };
-                    break;
 
-                case "vr_controller_vive_1_5":
 
-                    Transform dk2Trackhat = this.transform.FindChild("trackhat");
-                    if (dk2Trackhat == null)
-                    {
-                        dk2Trackhat = new GameObject("trackhat").transform;
-                        dk2Trackhat.parent = this.transform;
-                        dk2Trackhat.localPosition = new Vector3(0, -0.033f, 0.014f);
-                        dk2Trackhat.localScale = Vector3.one * 0.1f;
-                        dk2Trackhat.localEulerAngles = new Vector3(325, 0, 0);
-                        dk2Trackhat.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        dk2Trackhat.gameObject.SetActive(true);
-                    }
+                Colliders = new Collider[] { GetComponentInChildren<SphereCollider>() };
 
-                    Collider dk2TrackhatCollider = dk2Trackhat.gameObject.GetComponent<SphereCollider>();
-                    if (dk2TrackhatCollider == null)
-                    {
-                        dk2TrackhatCollider = dk2Trackhat.gameObject.AddComponent<SphereCollider>();
-                        dk2TrackhatCollider.isTrigger = true;
-                    }
+                if(Colliders.Length > 0)
+                {
+                    Debug.Log("Found collider");
+                }
 
-                    Colliders = new Collider[] { dk2TrackhatCollider };
-                    break;
+            }
+            else {
 
-                default:
-                    Debug.LogError("Error. Unsupported device type: " + controllerModel);
-                    break;
+                switch (controllerModel)
+                {
+                    case "vr_controller_05_wireless_b":
+                        Transform dk1Trackhat = this.transform.FindChild("trackhat");
+                        if (dk1Trackhat == null)
+                        {
+                            // Dk1 controller model has trackhat
+                        }
+                        else
+                        {
+                            dk1Trackhat.gameObject.SetActive(true);
+                        }
+
+                        SphereCollider dk1TrackhatCollider = dk1Trackhat.gameObject.GetComponent<SphereCollider>();
+                        if (dk1TrackhatCollider == null)
+                        {
+                            dk1TrackhatCollider = dk1Trackhat.gameObject.AddComponent<SphereCollider>();
+                            dk1TrackhatCollider.isTrigger = true;
+                        }
+
+                        Colliders = new Collider[] { dk1TrackhatCollider };
+                        break;
+
+                    case "vr_controller_vive_1_5":
+
+                        Transform dk2Trackhat = this.transform.FindChild("trackhat");
+                        if (dk2Trackhat == null)
+                        {
+                            dk2Trackhat = new GameObject("trackhat").transform;
+                            dk2Trackhat.parent = this.transform;
+                            dk2Trackhat.localPosition = new Vector3(0, -0.033f, 0.014f);
+                            dk2Trackhat.localScale = Vector3.one * 0.1f;
+                            dk2Trackhat.localEulerAngles = new Vector3(325, 0, 0);
+                            dk2Trackhat.gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            dk2Trackhat.gameObject.SetActive(true);
+                        }
+
+                        Collider dk2TrackhatCollider = dk2Trackhat.gameObject.GetComponent<SphereCollider>();
+                        if (dk2TrackhatCollider == null)
+                        {
+                            dk2TrackhatCollider = dk2Trackhat.gameObject.AddComponent<SphereCollider>();
+                            dk2TrackhatCollider.isTrigger = true;
+                        }
+
+                        Colliders = new Collider[] { dk2TrackhatCollider };
+                        break;
+
+                    default:
+                        Debug.LogError("Error. Unsupported device type: " + controllerModel);
+                        break;
+                }
             }
 
             NVRPlayer.Instance.RegisterHand(this);
@@ -494,8 +592,8 @@ namespace NewtonVR
     public enum VisibilityLevel
     {
         Invisible = 0,
-        Ghost = 70,
-        Visible = 100,
+        Ghost = 30,
+        Visible = 30,
     }
 
     public enum HandState

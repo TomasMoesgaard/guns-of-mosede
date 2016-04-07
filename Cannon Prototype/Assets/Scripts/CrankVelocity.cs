@@ -5,6 +5,10 @@ public class CrankVelocity : MonoBehaviour {
 
     public GameObject ObjectToRotate;
 
+    public GameObject Dial;
+
+    public bool IsAngleDial = false;
+
     public enum axis
     {
         X,Y,Z
@@ -46,6 +50,19 @@ public class CrankVelocity : MonoBehaviour {
                 break;
 
 
+        }
+
+        if (Dial != null)
+        {
+            if (IsAngleDial)
+            {
+                Dial.transform.Rotate(0f, 0f, (hj.velocity * Time.deltaTime / 100f) * -1f);
+            }
+            else
+            {
+
+                Dial.transform.Rotate(0f, 0f, (hj.velocity * Time.deltaTime / 100f) * 2f);
+            }
         }
 
     }

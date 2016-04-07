@@ -29,6 +29,8 @@ public class HatchControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+     //   Debug.Log("Hatch: " + joint.angle);
+        
 
         if (joint.angle > -89)
         {
@@ -79,6 +81,8 @@ public class HatchControl : MonoBehaviour {
         HATCH_LOCKED = true;
 
         fJoint = gameObject.AddComponent<FixedJoint>();
+
+        fJoint.connectedBody = transform.parent.GetComponent<Rigidbody>();
 
 
     }

@@ -87,13 +87,13 @@ public class Shell : MonoBehaviour {
 
         if(col.collider.tag == "Cannon")
         {
-
+            audioSource.volume = col.relativeVelocity.magnitude * 0.1f;
             audioSource.clip = SoundMetal;
 
         }
         else
         {
-
+            audioSource.volume = col.relativeVelocity.magnitude * 0.1f;
             audioSource.clip = SoundGround;
 
         }
@@ -150,6 +150,13 @@ public class Shell : MonoBehaviour {
         GetComponent<NVRInteractableItem>().enabled = true;
 
         transform.parent = null;
+
+        if(tag == "SpentShell")
+        {
+
+            GetComponent<ParticleSystem>().Play();
+
+        }
 
     }
 }
