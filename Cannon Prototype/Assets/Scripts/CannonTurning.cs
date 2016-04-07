@@ -32,7 +32,7 @@ public class CannonTurning : MonoBehaviour {
 
         Angle = Utility.SignedAngleBetween(-transform.right, northDir, transform.up);
 
-        ANGLE_TO_TARGET = Utility.SignedAngleBetween(targetDir, -transform.right, transform.up);
+        ANGLE_TO_TARGET = Vector3.Angle(new Vector3(transform.right.x, 0, transform.right.z), new Vector3(targetDir.x, 0, targetDir.z));
 
         DISTANCE_TO_TARGET = Vector3.Distance(transform.position, target.position);
 

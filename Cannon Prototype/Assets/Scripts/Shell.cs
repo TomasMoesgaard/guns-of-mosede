@@ -145,6 +145,11 @@ public class Shell : MonoBehaviour {
 
             c.enabled = true;
 
+            if(tag == "SpentShell")
+            {
+                c.material = BounceMetal;
+            }
+
         }
 
         GetComponent<NVRInteractableItem>().enabled = true;
@@ -155,6 +160,7 @@ public class Shell : MonoBehaviour {
         {
 
             GetComponent<ParticleSystem>().Play();
+            GetComponent<Rigidbody>().mass = 5f;
 
         }
 

@@ -17,41 +17,23 @@ public class TargetRandomizer : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        TargetLocation = RandomLocation();
-
-        switch (TargetLocation)
-        {
-            case Location.Agergaard:
-                transform.position = agergaard.position;
-                TargetText.text = "Target: Agergaard";
-                break;
-            case Location.Himmelbjerg:
-                transform.position = himmebjærg.position;
-                TargetText.text = "Target: Himmelbjærg";
-                break;
-            case Location.Langagergaard:
-                transform.position = langagergaard.position;
-                TargetText.text = "Target: Langagergaard";
-                break;
-            case Location.Søhøj:
-                transform.position = søhøj.position;
-                TargetText.text = "Target: Søhøj";
-                break;
-        }
-
-
-
-        //transform.position = new Vector3(Random.Range(-500, -7000), 0f, Random.Range(7000, -7000));
+        NewLocation();
 
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            NewLocation();
+
+        }
+
 	}
 
-    Location RandomLocation()
+   Location RandomLocation()
     {
         Location l = Location.Agergaard;
 
@@ -74,7 +56,41 @@ public class TargetRandomizer : MonoBehaviour {
 
         }
 
+        while(l == TargetLocation)
+        {
+
+            l = RandomLocation();
+
+        }
+
         return l;
+    }
+
+    public void NewLocation()
+    {
+
+        TargetLocation = RandomLocation();
+
+        switch (TargetLocation)
+        {
+            case Location.Agergaard:
+                transform.position = agergaard.position;
+                TargetText.text = "Target: Agergaard";
+                break;
+            case Location.Himmelbjerg:
+                transform.position = himmebjærg.position;
+                TargetText.text = "Target: Himmelbjærg";
+                break;
+            case Location.Langagergaard:
+                transform.position = langagergaard.position;
+                TargetText.text = "Target: Langagergaard";
+                break;
+            case Location.Søhøj:
+                transform.position = søhøj.position;
+                TargetText.text = "Target: Søhøj";
+                break;
+        }
+
     }
 
 }

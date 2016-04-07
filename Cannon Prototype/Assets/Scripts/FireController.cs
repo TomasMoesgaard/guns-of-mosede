@@ -14,6 +14,10 @@ public class FireController : MonoBehaviour {
 
     public ShellLoad SL;
 
+    public TargetRandomizer TR;
+
+    private int shotsFired = 0;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -30,6 +34,7 @@ public class FireController : MonoBehaviour {
 
     public void FireCannon()
     {
+       
 
         if (ShellLoad.CANNON_LOADED && HatchControl.HATCH_LOCKED)
         {
@@ -72,18 +77,33 @@ public class FireController : MonoBehaviour {
     IEnumerator HitMessage()
     {
 
+        shotsFired++;
+
         if (HitCheck())
         {
 
             text.text = "HIT";
 
+            shotsFired = 0;
+
+            TR.NewLocation();
+
         }
         else
         {
             text.text = "MISS";
+
+            if(shotsFired > 2)
+            {
+
+                shotsFired = 0;
+
+                TR.NewLocation();
+            }
+
         }
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
 
         text.text = "";
 
