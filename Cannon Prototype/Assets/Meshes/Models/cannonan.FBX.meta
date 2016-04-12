@@ -1,0 +1,393 @@
+fileFormatVersion: 2
+guid: ead139ceb70a9ee4d9620baa519dc92c
+timeCreated: 1456147363
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: ChamferBox001
+    100004: Circle001
+    100006: Circle002
+    100008: Cylinder001
+    100010: Cylinder002
+    100012: Cylinder003
+    100014: Cylinder004
+    100016: Object001
+    100018: Object002
+    100020: Object004
+    100022: Object005
+    100024: Object006
+    100026: Object007
+    100028: Rectangle001
+    100030: shell
+    400000: //RootNode
+    400002: ChamferBox001
+    400004: Circle001
+    400006: Circle002
+    400008: Cylinder001
+    400010: Cylinder002
+    400012: Cylinder003
+    400014: Cylinder004
+    400016: Object001
+    400018: Object002
+    400020: Object004
+    400022: Object005
+    400024: Object006
+    400026: Object007
+    400028: Rectangle001
+    400030: shell
+    2300000: ChamferBox001
+    2300002: Circle001
+    2300004: Circle002
+    2300006: Cylinder001
+    2300008: Cylinder002
+    2300010: Cylinder003
+    2300012: Cylinder004
+    2300014: Object001
+    2300016: Object002
+    2300018: Object004
+    2300020: Object005
+    2300022: Object006
+    2300024: Object007
+    2300026: Rectangle001
+    2300028: shell
+    3300000: ChamferBox001
+    3300002: Circle001
+    3300004: Circle002
+    3300006: Cylinder001
+    3300008: Cylinder002
+    3300010: Cylinder003
+    3300012: Cylinder004
+    3300014: Object001
+    3300016: Object002
+    3300018: Object004
+    3300020: Object005
+    3300022: Object006
+    3300024: Object007
+    3300026: Rectangle001
+    3300028: shell
+    4300000: Cylinder001
+    4300002: Object005
+    4300004: Object004
+    4300006: ChamferBox001
+    4300008: Object001
+    4300010: Object002
+    4300012: shell
+    4300014: Rectangle001
+    4300016: Circle001
+    4300018: Circle002
+    4300020: Cylinder002
+    4300022: Cylinder003
+    4300024: Cylinder004
+    4300026: Object006
+    4300028: Object007
+    7400000: Take 001
+    7400002: Load
+    7400004: Hatch
+    7400006: Fire
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 150
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Circle001
+        weight: 1
+      - path: Circle002
+        weight: 1
+      - path: Cylinder001
+        weight: 1
+      - path: Cylinder001/ChamferBox001
+        weight: 1
+      - path: Cylinder001/Object001
+        weight: 1
+      - path: Cylinder001/Object002
+        weight: 1
+      - path: Cylinder001/Object004
+        weight: 1
+      - path: Cylinder001/Object005
+        weight: 1
+      - path: Cylinder001/shell
+        weight: 1
+      - path: Cylinder002
+        weight: 1
+      - path: Cylinder003
+        weight: 1
+      - path: Cylinder004
+        weight: 1
+      - path: Object006
+        weight: 1
+      - path: Object007
+        weight: 1
+      - path: Rectangle001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Load
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Circle001
+        weight: 1
+      - path: Circle002
+        weight: 1
+      - path: Cylinder001
+        weight: 1
+      - path: Cylinder001/ChamferBox001
+        weight: 1
+      - path: Cylinder001/Object001
+        weight: 1
+      - path: Cylinder001/Object002
+        weight: 1
+      - path: Cylinder001/Object004
+        weight: 1
+      - path: Cylinder001/Object005
+        weight: 1
+      - path: Cylinder001/shell
+        weight: 1
+      - path: Cylinder002
+        weight: 1
+      - path: Cylinder003
+        weight: 1
+      - path: Cylinder004
+        weight: 1
+      - path: Object006
+        weight: 1
+      - path: Object007
+        weight: 1
+      - path: Rectangle001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Hatch
+      takeName: Take 001
+      firstFrame: 30
+      lastFrame: 47
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Circle001
+        weight: 1
+      - path: Circle002
+        weight: 1
+      - path: Cylinder001
+        weight: 1
+      - path: Cylinder001/ChamferBox001
+        weight: 1
+      - path: Cylinder001/Object001
+        weight: 1
+      - path: Cylinder001/Object002
+        weight: 1
+      - path: Cylinder001/Object004
+        weight: 1
+      - path: Cylinder001/Object005
+        weight: 1
+      - path: Cylinder001/shell
+        weight: 1
+      - path: Cylinder002
+        weight: 1
+      - path: Cylinder003
+        weight: 1
+      - path: Cylinder004
+        weight: 1
+      - path: Object006
+        weight: 1
+      - path: Object007
+        weight: 1
+      - path: Rectangle001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Fire
+      takeName: Take 001
+      firstFrame: 56
+      lastFrame: 71
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Circle001
+        weight: 1
+      - path: Circle002
+        weight: 1
+      - path: Cylinder001
+        weight: 1
+      - path: Cylinder001/ChamferBox001
+        weight: 1
+      - path: Cylinder001/Object001
+        weight: 1
+      - path: Cylinder001/Object002
+        weight: 1
+      - path: Cylinder001/Object004
+        weight: 1
+      - path: Cylinder001/Object005
+        weight: 1
+      - path: Cylinder001/shell
+        weight: 1
+      - path: Cylinder002
+        weight: 1
+      - path: Cylinder003
+        weight: 1
+      - path: Cylinder004
+        weight: 1
+      - path: Object006
+        weight: 1
+      - path: Object007
+        weight: 1
+      - path: Rectangle001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

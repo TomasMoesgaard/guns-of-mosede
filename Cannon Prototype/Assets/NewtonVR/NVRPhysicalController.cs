@@ -81,7 +81,7 @@ namespace NewtonVR
                     break;
 
                 default:
-                    Debug.LogError("Error. Unsupported device type: " + controllerModel);
+                    Debug.Log("Error. Unsupported device type: " + controllerModel);
                     break;
             }
 

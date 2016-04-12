@@ -17,9 +17,16 @@ namespace Leap.Unity {
       }
     }
     public float filtering = 0.5f;
-  
+
+        public bool TriggerHands = false;
+
     public override void InitHand() {
       base.InitHand();
+
+            if (TriggerHands)
+            {
+                MakeCollidersTriggers();
+            }
     }
   
     public override void UpdateHand() {
@@ -64,5 +71,20 @@ namespace Leap.Unity {
         }
       }
     }
-  }
+        void MakeCollidersTriggers()
+        {
+            Collider[] col = GetComponentsInChildren<Collider>();
+
+            foreach(Collider c in col)
+            {
+
+                c.isTrigger = true;
+
+            }
+
+        }
+    }
+
+
+
 }

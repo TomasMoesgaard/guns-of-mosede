@@ -198,8 +198,15 @@ namespace Leap.Unity{
       mockThumbJointSphere = createSphere("MockJoint", SPHERE_RADIUS);
       palmPositionSphere = createSphere("PalmPosition", PALM_RADIUS);
       wristPositionSphere = createSphere("WristPosition", SPHERE_RADIUS);
-  
-      armFrontLeft = createSphere("ArmFrontLeft", SPHERE_RADIUS, true);
+            /*
+            if (palmPositionSphere.GetComponent<SphereCollider>() == null)
+            {
+                SphereCollider r = palmPositionSphere.gameObject.AddComponent<SphereCollider>();
+
+                r.radius = 0.05f;
+            }
+            */
+            armFrontLeft = createSphere("ArmFrontLeft", SPHERE_RADIUS, true);
       armFrontRight = createSphere("ArmFrontRight", SPHERE_RADIUS, true);
       armBackLeft = createSphere("ArmBackLeft", SPHERE_RADIUS, true);
       armBackRight = createSphere("ArmBackRight", SPHERE_RADIUS, true);
@@ -281,5 +288,9 @@ namespace Leap.Unity{
         _armRenderers.Add(capsule.GetComponent<Renderer>());
       }
     }
+        public Vector3 PalmPosition()
+        {
+            return hand_.PalmPosition.ToVector3();
+        }
   }
 }

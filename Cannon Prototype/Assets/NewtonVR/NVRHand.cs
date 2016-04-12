@@ -52,10 +52,11 @@ namespace NewtonVR
 
         public bool IsALeapHand = false;
 
-        private LeapPinchDetector lpd;
+        public LeapPinchDetector lpd;
 
         public bool IsHovering
         {
+            
             get
             {
                 return CurrentlyHoveringOver.Any(kvp => kvp.Value.Count > 0);
@@ -83,7 +84,7 @@ namespace NewtonVR
 
             SteamVR_Utils.Event.Listen("render_model_loaded", RenderModelLoaded);
 
-            lpd = GetComponent<LeapPinchDetector>();
+            //lpd = GetComponent<LeapPinchDetector>();
         }
 
         protected void Update()
@@ -140,8 +141,10 @@ namespace NewtonVR
 
                 if (HoldButtonDown == true)
                 {
+
                     if (CurrentlyInteracting == null)
                     {
+                        Debug.Log("ButtonDown");
                         PickupClosest();
                     }
                 }
@@ -291,6 +294,7 @@ namespace NewtonVR
 
             if (Controller != null && IsInteracting == false && IsHovering == true)
             {
+                Debug.Log("Hovering");
                 Controller.TriggerHapticPulse(100);
             }
         }
@@ -303,7 +307,7 @@ namespace NewtonVR
                 {
                     interactable.AttachedHand.EndInteraction(null);
                 }
-
+                Debug.Log("Interacting");
                 CurrentlyInteracting = interactable;
                 CurrentlyInteracting.BeginInteraction(this);
             }
@@ -319,12 +323,15 @@ namespace NewtonVR
                 CurrentlyInteracting.EndInteraction();
                 CurrentlyInteracting = null;
             }
+            Debug.Log("Stopped interacting");
         }
 
         private void PickupClosest()
         {
             NVRInteractable closest = null;
             float closestDistance = float.MaxValue;
+
+           
 
             foreach (var hovering in CurrentlyHoveringOver)
             {
@@ -341,6 +348,8 @@ namespace NewtonVR
 
             if (closest != null)
             {
+
+                Debug.Log("BeginInteraction");
                 BeginInteraction(closest);
             }
         }
@@ -476,6 +485,8 @@ namespace NewtonVR
 
             string controllerModel = GetDeviceName();
 
+
+
             if (UsesCustomModel)
             {
 
@@ -543,7 +554,7 @@ namespace NewtonVR
                         break;
 
                     default:
-                        Debug.LogError("Error. Unsupported device type: " + controllerModel);
+                        Debug.Log("Error. Unsupported device type: " + controllerModel);
                         break;
                 }
             }
@@ -584,7 +595,14 @@ namespace NewtonVR
 
         public string GetDeviceName()
         {
-            return this.GetComponentInChildren<SteamVR_RenderModel>().renderModelName;
+            if (UsesCustomModel || IsALeapHand)
+            {
+                return "custom";
+            }
+            else
+            {
+                return this.GetComponentInChildren<SteamVR_RenderModel>().renderModelName;
+            }
         }
     }
     
@@ -592,8 +610,8 @@ namespace NewtonVR
     public enum VisibilityLevel
     {
         Invisible = 0,
-        Ghost = 30,
-        Visible = 30,
+        Ghost = 100,
+        Visible = 100,
     }
 
     public enum HandState
