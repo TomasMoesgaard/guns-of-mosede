@@ -4,7 +4,9 @@ using Leap.Unity;
 
 public class HandFollow : MonoBehaviour {
 
-    public CapsuleHand hand;
+    public GameObject hand;
+
+    public float handOffset = 0.05f;
 
 	// Use this for initialization
 	void Start () {
@@ -14,10 +16,8 @@ public class HandFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
-        if(hand.isActiveAndEnabled)
-        transform.position = hand.PalmPosition();
-
+        transform.position = hand.transform.position;
+        transform.rotation = hand.transform.rotation;
 
 
 	}

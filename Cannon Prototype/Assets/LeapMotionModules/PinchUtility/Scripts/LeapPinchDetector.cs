@@ -29,6 +29,8 @@ namespace Leap.Unity.PinchUtility {
     protected Vector3 _pinchPos;
     protected Quaternion _pinchRotation;
 
+    protected bool _handOpenFacingUp;
+
     protected virtual void OnValidate() {
       if (_handModel == null) {
         _handModel = GetComponentInParent<IHandModel>();
@@ -70,11 +72,20 @@ namespace Leap.Unity.PinchUtility {
       }
     }
 
-    /// <summary>
-    /// Returns whether or not the value of IsPinching is different than the value reported during
-    /// the previous frame.
-    /// </summary>
-    public bool DidChangeFromLastFrame {
+        public bool HandOpenFacingUp
+        {
+            get
+            {
+                ensurePinchInfoUpToDate();
+                return _handOpenFacingUp;
+            }
+        }
+
+        /// <summary>
+        /// Returns whether or not the value of IsPinching is different than the value reported during
+        /// the previous frame.
+        /// </summary>
+        public bool DidChangeFromLastFrame {
       get {
         ensurePinchInfoUpToDate();
         return _didChange;
@@ -160,6 +171,15 @@ namespace Leap.Unity.PinchUtility {
 
       float pinchDistance = hand.PinchDistance * MM_TO_M;
       transform.rotation = hand.Basis.Rotation();
+
+            if (!_isPinching && _handModel.IsTracked)
+            {
+                _handOpenFacingUp = true;
+            }
+            else
+            {
+                _handOpenFacingUp = false;
+            }
 
       var fingers = hand.Fingers;
       transform.position = Vector3.zero;

@@ -18,6 +18,11 @@ namespace NewtonVR
         public bool UseButtonUp = false;
         public bool UseButtonPressed = false;
 
+        private Valve.VR.EVRButtonId Pad = Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad;
+        public bool PadDown = false;
+        public bool PadUp = false;
+        public bool PadPressed = false;
+
         public Rigidbody Rigidbody;
 
         private VisibilityLevel CurrentVisibility = VisibilityLevel.Visible;
@@ -104,6 +109,11 @@ namespace NewtonVR
                 UseButtonDown = Controller.GetPressDown(UseButton);
                 UseButtonUp = Controller.GetPressUp(UseButton);
 
+                PadPressed = Controller.GetPress(Pad);
+                PadDown = Controller.GetPressDown(Pad);
+                PadUp = Controller.GetPressUp(Pad);
+
+
                 if (HoldButtonUp)
                 {
                     VisibilityLocked = false;
@@ -134,10 +144,13 @@ namespace NewtonVR
             else
             {
 
-
+               
                 HoldButtonPressed = lpd.DidStartPinch;
                 HoldButtonDown = lpd.IsPinching;
                 HoldButtonUp = lpd.DidEndPinch;
+
+                PadPressed = lpd.HandOpenFacingUp;
+
 
                 if (HoldButtonDown == true)
                 {
@@ -294,7 +307,7 @@ namespace NewtonVR
 
             if (Controller != null && IsInteracting == false && IsHovering == true)
             {
-                Debug.Log("Hovering");
+              //  Debug.Log("Hovering");
                 Controller.TriggerHapticPulse(100);
             }
         }
@@ -570,7 +583,7 @@ namespace NewtonVR
 
                 PhysicalController = this.gameObject.AddComponent<NVRPhysicalController>();
                 PhysicalController.Initialize(this, false);
-
+/*
                 Color transparentcolor = Color.white;
                 transparentcolor.a = (float)VisibilityLevel.Ghost / 100f;
 
@@ -579,7 +592,7 @@ namespace NewtonVR
                 {
                     NVRHelpers.SetTransparent(GhostRenderers[rendererIndex].material, transparentcolor);
                 }
-
+                */
                 GhostColliders = Colliders;
                 CurrentVisibility = VisibilityLevel.Ghost;
             }

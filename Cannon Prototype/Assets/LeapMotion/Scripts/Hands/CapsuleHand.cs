@@ -32,6 +32,7 @@ namespace Leap.Unity{
   
     private Transform wristPositionSphere;
   
+
     private List<Renderer> _armRenderers;
     private List<Transform> _capsuleTransforms;
     private List<Transform> _sphereATransforms;
@@ -39,7 +40,9 @@ namespace Leap.Unity{
   
     private Transform armFrontLeft, armFrontRight, armBackLeft, armBackRight;
     private Hand hand_;
-  
+
+        private Quaternion handRotation;
+
     public override ModelType HandModelType {
       get {
         return ModelType.Graphics;
@@ -173,7 +176,12 @@ namespace Leap.Unity{
         }
   
         capsule.rotation = Quaternion.LookRotation(perp, delta);
-      }
+
+                if (capsule.name == "Hand Side")
+                {
+                    handRotation = capsule.transform.rotation;
+                }
+            }
     }
   
     private void updateArmVisibility() {
@@ -284,6 +292,11 @@ namespace Leap.Unity{
   
       capsule.hideFlags = HideFlags.DontSave | HideFlags.HideInHierarchy | HideFlags.HideInInspector;
   
+            if(capsule.name == "Hand Side")
+            {
+                handRotation = capsule.transform.rotation;
+            }
+
       if (isPartOfArm) {
         _armRenderers.Add(capsule.GetComponent<Renderer>());
       }
@@ -292,5 +305,10 @@ namespace Leap.Unity{
         {
             return hand_.PalmPosition.ToVector3();
         }
-  }
+
+        public Quaternion PalmRotation()
+        {
+            return handRotation;
+        }
+    }
 }

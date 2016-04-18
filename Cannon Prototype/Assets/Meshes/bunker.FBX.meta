@@ -1,24 +1,15 @@
 fileFormatVersion: 2
-guid: 54a995215ec35d7438ca61a37e965ca9
-timeCreated: 1459850493
+guid: 10e0d5c540f9dc341adbd239ccf9ca88
+timeCreated: 1460980966
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: book main
-    100004: book003
-    100006: book1
-    100008: book2
     400000: //RootNode
-    400002: book main
-    400004: book003
-    400006: book1
-    400008: book2
-    4300000: book003
-    7400000: Take 001
-    9500000: //RootNode
-    13700000: book003
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: bunker
   materials:
     importMaterials: 1
     materialName: 0
@@ -39,52 +30,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
-      firstFrame: 0
-      lastFrame: 8
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events:
-      - time: 0.86754
-        functionName: ShowPages
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      transformMask:
-      - path: 
-        weight: 1
-      - path: book main
-        weight: 1
-      - path: book main/book1
-        weight: 1
-      - path: book main/book2
-        weight: 1
-      - path: book003
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -122,7 +68,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
