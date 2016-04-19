@@ -75,19 +75,19 @@ public class TargetRandomizer : MonoBehaviour {
         {
             case Location.Agergaard:
                 transform.position = agergaard.position;
-                TargetText.text = "Target: Agergaard";
+                TargetText.text = "Mål: Agergaard";
                 break;
             case Location.Himmelbjerg:
                 transform.position = himmebjærg.position;
-                TargetText.text = "Target: Himmelbjærg";
+                TargetText.text = "Mål: Himmelbjærg";
                 break;
             case Location.Langagergaard:
                 transform.position = langagergaard.position;
-                TargetText.text = "Target: Langagergaard";
+                TargetText.text = "Mål: Langagergaard";
                 break;
             case Location.Søhøj:
                 transform.position = søhøj.position;
-                TargetText.text = "Target: Søhøj";
+                TargetText.text = "Mål: Søhøj";
                 break;
         }
 

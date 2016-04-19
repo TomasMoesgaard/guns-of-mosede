@@ -18,6 +18,8 @@ public class FireController : MonoBehaviour {
 
     private int shotsFired = 0;
 
+    public Text[] texts;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -45,7 +47,7 @@ public class FireController : MonoBehaviour {
 
             SL.loadedShell.FireShell();
 
-            StartCoroutine(HitMessage());
+            HitMessage();
 
            // HitObject.transform.localPosition = new Vector3(CannonTilting.RANGE, 0f, 0f);
 
@@ -74,39 +76,24 @@ public class FireController : MonoBehaviour {
 
     }
 
-    IEnumerator HitMessage()
+    void HitMessage()
     {
 
-        shotsFired++;
 
         if (HitCheck())
         {
 
-            text.text = "HIT";
-
-            shotsFired = 0;
-
-            TR.NewLocation();
+            texts[shotsFired].text = "Pletskud";
 
         }
         else
         {
-            text.text = "MISS";
 
-            if(shotsFired > 2)
-            {
-
-                shotsFired = 0;
-
-                TR.NewLocation();
-            }
+            texts[shotsFired].text = "Ramte " + CannonTilting.RANGE_DIFFERENCE.ToString("F1") + " M forbi målet";
 
         }
 
-        yield return new WaitForSeconds(5);
-
-        text.text = "";
-
+        shotsFired++;
 
     }
 

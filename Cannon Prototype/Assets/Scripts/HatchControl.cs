@@ -19,8 +19,12 @@ public class HatchControl : MonoBehaviour {
 
     public ShellLoad sl;
 
+    private AudioSource sound;
+
 	// Use this for initialization
 	void Start () {
+
+        sound = GetComponent<AudioSource>();
 
         joint = GetComponent<HingeJoint>();
 	
@@ -84,6 +88,7 @@ public class HatchControl : MonoBehaviour {
 
         fJoint.connectedBody = transform.parent.GetComponent<Rigidbody>();
 
+        sound.Play();
 
     }
 
@@ -99,6 +104,7 @@ public class HatchControl : MonoBehaviour {
 
             HATCH_LOCKED = false;
 
+            sound.Play();
         }
     }
 }

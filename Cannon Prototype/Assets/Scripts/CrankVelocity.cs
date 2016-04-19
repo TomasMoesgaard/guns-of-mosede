@@ -17,11 +17,18 @@ public class CrankVelocity : MonoBehaviour {
     public axis Axis;
 
     private HingeJoint hj;
-   
+
+    private AudioSource audioSource;
+
+    private float soundVelocity;
+
     // Use this for initialization
     void Start () {
 
         hj = GetComponent<HingeJoint>();
+
+        audioSource = GetComponent<AudioSource>();
+
 
 
     }
@@ -33,7 +40,7 @@ public class CrankVelocity : MonoBehaviour {
         {
             case axis.X:
 
-                ObjectToRotate.transform.Rotate(hj.velocity* Time.deltaTime / 100f, 0f, 0f);
+                ObjectToRotate.transform.Rotate(hj.velocity * Time.deltaTime / 100f, 0f, 0f);
 
                 break;
 
@@ -65,5 +72,29 @@ public class CrankVelocity : MonoBehaviour {
             }
         }
 
+        audioSource.volume = SoundVelocity(hj.velocity);
+
+        if (hj.angle < 2f && hj.angle > 0f)
+        {
+
+            audioSource.Play();
+
+        }
+
+        ObjectToRotate.GetComponent<AudioSource>().volume = SoundVelocity(hj.velocity);
+
     }
+
+    float SoundVelocity(float v)
+    {
+
+        float absV = Mathf.Abs(v);
+
+        float mappedV = Utility.MapRange(absV, 0f, 180f, 0f, 1f);
+
+
+        return Mathf.Clamp01(mappedV);
+    }
+
+
 }
