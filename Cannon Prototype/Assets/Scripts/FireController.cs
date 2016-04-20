@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class FireController : MonoBehaviour {
 
-    public ParticleSystem Blast;
+    public ParticleSystem[] Blast;
 
     public AudioSource Sound;
 
@@ -40,7 +40,12 @@ public class FireController : MonoBehaviour {
 
         if (ShellLoad.CANNON_LOADED && HatchControl.HATCH_LOCKED)
         {
-            Blast.Play();
+
+            foreach(ParticleSystem p in Blast)
+            {
+                p.Play();
+            }
+
             Sound.Play();
 
             ShellLoad.CANNON_LOADED = false;

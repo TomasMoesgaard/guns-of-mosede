@@ -22,6 +22,8 @@ public class CrankVelocity : MonoBehaviour {
 
     private float soundVelocity;
 
+    private float velocity;
+
     // Use this for initialization
     void Start () {
 
@@ -36,43 +38,57 @@ public class CrankVelocity : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        velocity = hj.velocity;
+
+        /*
+        if(Axis == axis.X)
+        {
+            if (ObjectToRotate.transform.localRotation.x > 360 && velocity > 0f)
+            {
+                velocity = 0f;
+            }
+
+            if (ObjectToRotate.transform.localRotation.x < 270 && velocity < 0f)
+            {
+                velocity = 0f;
+            }
+        }
+        */
+
         switch (Axis)
         {
             case axis.X:
 
-                ObjectToRotate.transform.Rotate(hj.velocity * Time.deltaTime / 100f, 0f, 0f);
+                ObjectToRotate.transform.Rotate(velocity * Time.deltaTime / 100f, 0f, 0f);
 
                 break;
 
             case axis.Y:
 
-                ObjectToRotate.transform.Rotate(0f, hj.velocity * Time.deltaTime / 100f, 0f);
+                ObjectToRotate.transform.Rotate(0f, velocity * Time.deltaTime / 100f, 0f);
 
                 break;
 
             case axis.Z:
 
-                ObjectToRotate.transform.Rotate(0f, 0f, hj.velocity * Time.deltaTime / 100f);
+                ObjectToRotate.transform.Rotate(0f, 0f, velocity * Time.deltaTime / 100f);
 
                 break;
-
-
         }
 
         if (Dial != null)
         {
             if (IsAngleDial)
             {
-                Dial.transform.Rotate(0f, 0f, (hj.velocity * Time.deltaTime / 100f) * -1f);
+                Dial.transform.Rotate(0f, 0f, (velocity * Time.deltaTime / 100f) * -1f);
             }
             else
             {
-
-                Dial.transform.Rotate(0f, 0f, (hj.velocity * Time.deltaTime / 100f) * 2f);
+                Dial.transform.Rotate(0f, 0f, (velocity * Time.deltaTime / 100f) * 2f);
             }
         }
 
-        audioSource.volume = SoundVelocity(hj.velocity);
+        audioSource.volume = SoundVelocity(velocity);
 
         if (hj.angle < 2f && hj.angle > 0f)
         {
@@ -81,7 +97,7 @@ public class CrankVelocity : MonoBehaviour {
 
         }
 
-        ObjectToRotate.GetComponent<AudioSource>().volume = SoundVelocity(hj.velocity);
+        ObjectToRotate.GetComponent<AudioSource>().volume = SoundVelocity(velocity);
 
     }
 

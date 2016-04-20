@@ -5,7 +5,7 @@ public class CannonTrigger : MonoBehaviour {
 
     private ConfigurableJoint joint;
 
-    private Vector3 startPosisiton;
+    private Vector3 startPosistion;
 
     public FireController fc;
 
@@ -14,9 +14,9 @@ public class CannonTrigger : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        startPosisiton = transform.localPosition;
+     //   startPosistion = transform.localPosition;
 
-        joint = GetComponent<ConfigurableJoint>();
+      //  joint = GetComponent<ConfigurableJoint>();
 
 	}
 	
