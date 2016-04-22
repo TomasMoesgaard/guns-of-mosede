@@ -86,7 +86,7 @@ From this, equation (1) gives the maximum range:
 
        // TiltText.text = "Distance from target: " + RANGE_DIFFERENCE.ToString("F2");
 
-        TiltText.text = Angle.ToString("F2");
+      //  TiltText.text = Angle.ToString("F2");
 
     }
 

@@ -11,6 +11,7 @@ public class FireController : MonoBehaviour {
     public Text text;
 
     public GameObject HitObject;
+    public GameObject TargetObject;
 
     public ShellLoad SL;
 
@@ -29,10 +30,10 @@ public class FireController : MonoBehaviour {
 	void Update () {
 
 
+        HitObject.transform.position = transform.GetChild(0).transform.right * CannonTilting.RANGE;
 
 
-	
-	}
+    }
 
     public void FireCannon()
     {
@@ -65,17 +66,14 @@ public class FireController : MonoBehaviour {
     {
         bool hit = false;
 
-        if (Mathf.Abs(CannonTurning.ANGLE_TO_TARGET) < 2)
+        if (Vector3.Distance(HitObject.transform.position, TargetObject.transform.position) < 50)
         {
 
-            if(Mathf.Abs(CannonTilting.RANGE_DIFFERENCE) < 50)
-            {
                 hit = true;
-            }
 
         }
 
-        Debug.Log("Distance: " + CannonTilting.RANGE_DIFFERENCE + "  Angle: " + CannonTurning.ANGLE_TO_TARGET);
+        //Debug.Log("Distance: " + CannonTilting.RANGE_DIFFERENCE + "  Angle: " + CannonTurning.ANGLE_TO_TARGET);
 
         return hit;
 
@@ -83,7 +81,9 @@ public class FireController : MonoBehaviour {
 
     void HitMessage()
     {
+        texts[0].GetComponentInParent<AudioSource>().Play();
 
+        
 
         if (HitCheck())
         {
@@ -94,7 +94,7 @@ public class FireController : MonoBehaviour {
         else
         {
 
-            texts[shotsFired].text = "Ramte " + CannonTilting.RANGE_DIFFERENCE.ToString("F1") + " M forbi målet";
+            texts[shotsFired].text = "Ramte " + Vector3.Distance(HitObject.transform.position, TargetObject.transform.position).ToString("F1") + " M forbi målet";
 
         }
 

@@ -106,10 +106,10 @@ public class CrankVelocity : MonoBehaviour {
 
         float absV = Mathf.Abs(v);
 
-        float mappedV = Utility.MapRange(absV, 0f, 180f, 0f, 1f);
+        float mappedV = Utility.MapRange(absV, 0f, 360f, 0f, 0.2f);
 
 
-        return Mathf.Clamp01(mappedV);
+        return Mathf.Clamp(mappedV, 0f, 0.2f);
     }
 
 

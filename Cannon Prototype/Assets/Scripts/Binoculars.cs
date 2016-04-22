@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.ImageEffects;
+using NewtonVR;
 
 public class Binoculars : MonoBehaviour {
 
@@ -11,6 +12,8 @@ public class Binoculars : MonoBehaviour {
     private Renderer renderer;
 
     private VignetteAndChromaticAberration vig;
+
+    private GameObject controller;
 
 	// Use this for initialization
 	void Start () {
@@ -61,11 +64,17 @@ public class Binoculars : MonoBehaviour {
     void ZoomIn()
     {
 
+        controller = GetComponent<NVRInteractableItem>().AttachedHand.gameObject;
+
         mainCamera.fieldOfView = 30f;
 
         mainCamera.gameObject.GetComponent<VignetteAndChromaticAberration>().enabled = true;
 
-        renderer.enabled = false;
+        gameObject.layer = 8;
+
+        controller.GetComponentInChildren<Renderer>().gameObject.layer = 8;
+
+     //   renderer.enabled = false;
 
     }
 
@@ -76,7 +85,10 @@ public class Binoculars : MonoBehaviour {
 
         mainCamera.gameObject.GetComponent<VignetteAndChromaticAberration>().enabled = false;
 
-        renderer.enabled = true;
+        gameObject.layer = 0;
+
+        controller.GetComponentInChildren<Renderer>().gameObject.layer = 0;
+        //  renderer.enabled = true;
     }
 
 

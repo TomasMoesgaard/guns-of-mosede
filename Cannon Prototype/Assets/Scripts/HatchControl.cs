@@ -21,6 +21,8 @@ public class HatchControl : MonoBehaviour {
 
     private AudioSource sound;
 
+    public AudioSource ScrapingSound;
+
 	// Use this for initialization
 	void Start () {
 
@@ -74,6 +76,7 @@ public class HatchControl : MonoBehaviour {
 
         }
 
+        ScrapingSound.volume = SoundVelocity(joint.velocity);
 
 	}
 
@@ -106,5 +109,16 @@ public class HatchControl : MonoBehaviour {
 
             sound.Play();
         }
+    }
+
+    float SoundVelocity(float v)
+    {
+
+        float absV = Mathf.Abs(v);
+
+        float mappedV = Utility.MapRange(absV, 0f, 360f, 0f, 0.2f);
+
+
+        return Mathf.Clamp(mappedV, 0f, 0.2f);
     }
 }

@@ -36,7 +36,7 @@ public class CannonTurning : MonoBehaviour {
 
         DISTANCE_TO_TARGET = Vector3.Distance(transform.position, target.position);
 
-        AngleText.text = Angle.ToString("F2");
+       // AngleText.text = Angle.ToString("F2");
 
     }
 
