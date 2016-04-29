@@ -6,8 +6,6 @@ public class HandFollow : MonoBehaviour {
 
     public GameObject hand;
 
-    public float handOffset = 0.05f;
-
 	// Use this for initialization
 	void Start () {
 	

@@ -84,7 +84,7 @@ public class CrankVelocity : MonoBehaviour {
             }
             else
             {
-                Dial.transform.Rotate(0f, 0f, (velocity * Time.deltaTime / 100f) * 2f);
+                Dial.transform.Rotate(0f, 0f, (velocity * Time.deltaTime / 100f) * 4f);
             }
         }
 

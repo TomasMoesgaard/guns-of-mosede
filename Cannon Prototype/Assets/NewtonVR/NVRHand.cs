@@ -157,7 +157,7 @@ namespace NewtonVR
 
                     if (CurrentlyInteracting == null)
                     {
-                        Debug.Log("ButtonDown");
+                       // Debug.Log("ButtonDown");
                         PickupClosest();
                     }
                 }

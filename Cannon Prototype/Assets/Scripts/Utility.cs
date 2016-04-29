@@ -32,7 +32,7 @@ public static class Utility
     public static float CalculateCanonTilt(float d)
     {
 
-        return 0.5f * (Mathf.Asin((9.8f * d) / Mathf.Pow(280f, 2f)) * Mathf.Rad2Deg);
+        return 0.5f * (Mathf.Asin((9.8f * d) / Mathf.Pow(180f, 2f)) * Mathf.Rad2Deg);
 
     }
 }

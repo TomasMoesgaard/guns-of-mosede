@@ -53,7 +53,19 @@ public class FireController : MonoBehaviour {
 
             SL.loadedShell.FireShell();
 
-            HitMessage();
+            if (shotsFired < 3)
+            {
+
+                if (LanguageManager.CurrentLanguage == LanguageManager.Language.Danish)
+                {
+                    HitMessageDK();
+                }
+                else
+                {
+                    HitMessageEN();
+                }
+
+            }
 
            // HitObject.transform.localPosition = new Vector3(CannonTilting.RANGE, 0f, 0f);
 
@@ -66,7 +78,7 @@ public class FireController : MonoBehaviour {
     {
         bool hit = false;
 
-        if (Vector3.Distance(HitObject.transform.position, TargetObject.transform.position) < 50)
+        if (Vector3.Distance(HitObject.transform.position, TargetObject.transform.position) < 100)
         {
 
                 hit = true;
@@ -79,7 +91,7 @@ public class FireController : MonoBehaviour {
 
     }
 
-    void HitMessage()
+    void HitMessageDK()
     {
         texts[0].GetComponentInParent<AudioSource>().Play();
 
@@ -102,7 +114,28 @@ public class FireController : MonoBehaviour {
 
     }
 
+    void HitMessageEN()
+    {
+        texts[0].GetComponentInParent<AudioSource>().Play();
 
+
+
+        if (HitCheck())
+        {
+
+            texts[shotsFired].text = "Direct hit";
+
+        }
+        else
+        {
+
+            texts[shotsFired].text = "Missed by " + Vector3.Distance(HitObject.transform.position, TargetObject.transform.position).ToString("F1") + " M";
+
+        }
+
+        shotsFired++;
+
+    }
 
 
 }

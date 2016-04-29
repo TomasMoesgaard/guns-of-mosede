@@ -26,6 +26,8 @@ public class CollisionAudio : MonoBehaviour {
 
         audioSource.volume = col.relativeVelocity.magnitude * 0.1f;
 
+        
+
         audioSource.Play();
 
     }
