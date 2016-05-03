@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class TargetRandomizer : MonoBehaviour {
 
-    public enum Location {Agergaard, Himmelbjerg, Langagergaard, Søhøj};
+    public enum Location {Agergaard, Himmelbjerg, Langagergaard, Søhøj, Kildegaard, Søndergaard, Sønderholm};
 
     public Location TargetLocation;
 
@@ -12,6 +12,9 @@ public class TargetRandomizer : MonoBehaviour {
     public Transform himmebjærg;
     public Transform langagergaard;
     public Transform søhøj;
+    public Transform kildegaard;
+    public Transform søndergaard;
+    public Transform sønderholm;
 
     public Text TargetText;
     // Use this for initialization
@@ -37,7 +40,7 @@ public class TargetRandomizer : MonoBehaviour {
     {
         Location l = Location.Agergaard;
 
-        int randInt = Random.Range(0, 4);
+        int randInt = Random.Range(0, 7);
 
         switch (randInt)
         {
@@ -52,6 +55,15 @@ public class TargetRandomizer : MonoBehaviour {
                 break;
             case 3:
                 l = Location.Søhøj;
+                break;
+            case 4:
+                l = Location.Kildegaard;
+                break;
+            case 5:
+                l = Location.Søndergaard;
+                break;
+            case 6:
+                l = Location.Sønderholm;
                 break;
 
         }
@@ -88,6 +100,18 @@ public class TargetRandomizer : MonoBehaviour {
             case Location.Søhøj:
                 transform.position = søhøj.position;
                 TargetText.text = "Søhøj";
+                break;
+            case Location.Kildegaard:
+                transform.position = kildegaard.position;
+                TargetText.text = "Kildegaard";
+                break;
+            case Location.Søndergaard:
+                transform.position = søndergaard.position;
+                TargetText.text = "Søndergaard";
+                break;
+            case Location.Sønderholm:
+                transform.position = sønderholm.position;
+                TargetText.text = "Sønderholm";
                 break;
         }
 

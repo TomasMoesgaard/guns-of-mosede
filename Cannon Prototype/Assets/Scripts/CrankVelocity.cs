@@ -80,7 +80,7 @@ public class CrankVelocity : MonoBehaviour {
         {
             if (IsAngleDial)
             {
-                Dial.transform.Rotate(0f, 0f, (velocity * Time.deltaTime / 100f) * -1f);
+                Dial.transform.Rotate(0f, 0f, (velocity * Time.deltaTime / 100f) * -2f);
             }
             else
             {
@@ -107,7 +107,6 @@ public class CrankVelocity : MonoBehaviour {
         float absV = Mathf.Abs(v);
 
         float mappedV = Utility.MapRange(absV, 0f, 360f, 0f, 0.2f);
-
 
         return Mathf.Clamp(mappedV, 0f, 0.2f);
     }

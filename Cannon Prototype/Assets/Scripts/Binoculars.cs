@@ -64,16 +64,19 @@ public class Binoculars : MonoBehaviour {
     void ZoomIn()
     {
 
-        controller = GetComponent<NVRInteractableItem>().AttachedHand.gameObject;
+        if (GetComponent<NVRInteractableItem>().AttachedHand != null)
+        {
 
-        mainCamera.fieldOfView = 30f;
+            controller = GetComponent<NVRInteractableItem>().AttachedHand.gameObject;
 
-        mainCamera.gameObject.GetComponent<VignetteAndChromaticAberration>().enabled = true;
+            mainCamera.fieldOfView = 30f;
 
-        gameObject.layer = 8;
+            mainCamera.gameObject.GetComponent<VignetteAndChromaticAberration>().enabled = true;
 
-        controller.GetComponentInChildren<Renderer>().gameObject.layer = 8;
+            gameObject.layer = 8;
 
+            controller.GetComponentInChildren<Renderer>().gameObject.layer = 8;
+        }
      //   renderer.enabled = false;
 
     }
@@ -87,7 +90,8 @@ public class Binoculars : MonoBehaviour {
 
         gameObject.layer = 0;
 
-        controller.GetComponentInChildren<Renderer>().gameObject.layer = 0;
+        if (GetComponent<NVRInteractableItem>().AttachedHand != null)
+            controller.GetComponentInChildren<Renderer>().gameObject.layer = 0;
         //  renderer.enabled = true;
     }
 
