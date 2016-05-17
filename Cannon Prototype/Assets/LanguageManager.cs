@@ -21,6 +21,10 @@ public class LanguageManager : MonoBehaviour {
     public GameObject EnglishPanel;
 
 
+    public GameObject ControllerCam;
+
+    public GameObject WindowCamera;
+
 
     // Use this for initialization
     void Start () {
@@ -35,6 +39,12 @@ public class LanguageManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.L))
         {
             ChangeLanguage();
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ChangeCamera();
+
         }
 
         if (ChangedSinceLastFrame)
@@ -103,6 +113,28 @@ public class LanguageManager : MonoBehaviour {
         }
 
         ChangedSinceLastFrame = true;
+
+    }
+
+    public void ChangeCamera()
+    {
+
+        if (ControllerCam.activeInHierarchy)
+        {
+
+            ControllerCam.SetActive(false);
+
+            WindowCamera.SetActive(true);
+
+        }
+        else
+        {
+
+            ControllerCam.SetActive(true);
+
+            WindowCamera.SetActive(false);
+
+        }
 
     }
 
