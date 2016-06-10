@@ -41,6 +41,8 @@ public class HatchControl : MonoBehaviour {
         if (joint.angle > -89)
         {
             HATCH_OPEN = true;
+
+            HATCH_LOCKED = false;
         }
 
 
