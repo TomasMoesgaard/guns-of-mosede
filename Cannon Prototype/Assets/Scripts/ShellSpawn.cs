@@ -21,7 +21,7 @@ public class ShellSpawn : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-        if(empty && !GetComponent<Renderer>().isVisible)
+        if(empty && !GetComponent<Renderer>().IsVisibleFrom(Camera.main))
         {
             Instantiate(ShellPrefab, SpawnPoint.position, SpawnPoint.rotation);
         }

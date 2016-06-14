@@ -59,6 +59,10 @@ namespace NewtonVR
 
         public LeapPinchDetector lpd;
 
+        public static bool SHELL_IN_HAND = false;
+
+        public static bool WHEEL_IN_HAND = false; 
+
         public bool IsHovering
         {
             
@@ -94,6 +98,31 @@ namespace NewtonVR
 
         protected void Update()
         {
+
+            if(CurrentlyInteracting != null)
+            {
+                if(CurrentlyInteracting.tag == "Shell")
+                {
+                    SHELL_IN_HAND = true;
+                }
+            }
+            else
+            {
+                SHELL_IN_HAND = false;
+            }
+
+            if (CurrentlyInteracting != null)
+            {
+                if (CurrentlyInteracting.tag == "Handle")
+                {
+                    WHEEL_IN_HAND = true;
+                }
+            }
+            else
+            {
+                WHEEL_IN_HAND = false;
+            }
+
             if (!IsALeapHand)
             {
                 if (Controller == null || CurrentHandState == HandState.Uninitialized)

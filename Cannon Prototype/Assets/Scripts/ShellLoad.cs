@@ -21,8 +21,7 @@ public class ShellLoad : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-	
+        
 	}
 
     void OnTriggerEnter(Collider col)
@@ -70,6 +69,6 @@ public class ShellLoad : MonoBehaviour {
 
     }
 
-
+    
 
 }
