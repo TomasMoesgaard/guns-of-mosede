@@ -14,6 +14,10 @@ public class LanguageManager : MonoBehaviour {
 
     public Text Reset;
 
+    public Text LanguageLever;
+
+    public Text TutorialLever;
+
     public Text Target;
 
     public GameObject DanishPanel;
@@ -48,9 +52,13 @@ public class LanguageManager : MonoBehaviour {
                         Tries[i].text = i + 1 + ". forsøg";
                     }
 
-                    Target.text = "Mål:";
+                    Target.text = "Tyskernes position:";
 
                     Reset.text = "< Træk her for at starte forfra";
+
+                    TutorialLever.text = "Hjælpe-pile Til/Fra";
+
+                    LanguageLever.text = "Skift sprog";
 
                     break;
 
@@ -61,9 +69,13 @@ public class LanguageManager : MonoBehaviour {
                         Tries[i].text = i + 1 + ". try";
                     }
 
-                    Target.text = "Target:";
+                    Target.text = "German position:";
 
                     Reset.text = "< Pull here to reset";
+
+                    TutorialLever.text = "Tutorial-arrows On/Off";
+
+                    LanguageLever.text = "Change language";
 
                     break;
 

@@ -35,4 +35,10 @@ public static class Utility
         return 0.5f * (Mathf.Asin((9.8f * d) / Mathf.Pow(180f, 2f)) * Mathf.Rad2Deg);
 
     }
+
+    public static void ResetGame()
+    {
+
+
+    }
 }

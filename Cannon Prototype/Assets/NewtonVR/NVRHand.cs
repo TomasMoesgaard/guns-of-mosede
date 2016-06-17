@@ -59,9 +59,9 @@ namespace NewtonVR
 
         public LeapPinchDetector lpd;
 
-        public static bool SHELL_IN_HAND = false;
+        public bool SHELL_IN_HAND = false;
 
-        public static bool WHEEL_IN_HAND = false; 
+        public bool WHEEL_IN_HAND = false; 
 
         public bool IsHovering
         {
@@ -104,6 +104,9 @@ namespace NewtonVR
                 if(CurrentlyInteracting.tag == "Shell")
                 {
                     SHELL_IN_HAND = true;
+
+                    Debug.Log("Holding shell!!");
+
                 }
             }
             else

@@ -13,6 +13,8 @@ public class ShellSpawn : MonoBehaviour {
 
     private int numberOfShells;
 
+    public Camera EyeCamera;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -21,7 +23,7 @@ public class ShellSpawn : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-        if(empty && !GetComponent<Renderer>().IsVisibleFrom(Camera.main))
+        if(empty && !GetComponent<Renderer>().IsVisibleFrom(EyeCamera))
         {
             Instantiate(ShellPrefab, SpawnPoint.position, SpawnPoint.rotation);
         }

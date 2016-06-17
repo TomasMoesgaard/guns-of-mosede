@@ -4,6 +4,9 @@ using NewtonVR;
 
 public class LeverReset : MonoBehaviour {
 
+
+    public WebcamScript webcam;
+
     private NVRLever lever;
 
 	// Use this for initialization
@@ -18,10 +21,20 @@ public class LeverReset : MonoBehaviour {
 
         if (lever.LeverEngaged)
         {
+            webcam.StopWebcam();
 
             SteamVR_LoadLevel.Begin("1");
 
         }
 
-	}
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+
+            webcam.StopWebcam();
+
+            SteamVR_LoadLevel.Begin("1");
+
+        }
+
+    }
 }

@@ -8,6 +8,19 @@ public class FireController : MonoBehaviour {
 
     public AudioSource Sound;
 
+    public AudioSource DistantSound;
+
+    public AudioSource BingSound;
+
+    public Renderer BoardColor;
+
+    [ColorUsageAttribute(true, true, 0f, 8f, 0.125f, 3f)]
+    public Color Blue;
+    [ColorUsageAttribute(true, true, 0f, 8f, 0.125f, 3f)]
+    public Color Green;
+    [ColorUsageAttribute(true, true, 0f, 8f, 0.125f, 3f)]
+    public Color Red;
+
     public Text text;
 
     public GameObject HitObject;
@@ -23,8 +36,12 @@ public class FireController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
-	}
+
+        BoardColor.material.EnableKeyword("_EmissionColor");
+
+        BoardColor.material.SetColor("_EmissionColor", Blue);
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -53,22 +70,8 @@ public class FireController : MonoBehaviour {
 
             SL.loadedShell.FireShell();
 
-            if (shotsFired < 3)
-            {
 
-                if (LanguageManager.CurrentLanguage == LanguageManager.Language.Danish)
-                {
-                    HitMessageDK();
-                }
-                else
-                {
-                    HitMessageEN();
-                }
-
-            }
-
-           // HitObject.transform.localPosition = new Vector3(CannonTilting.RANGE, 0f, 0f);
-
+            StartCoroutine(DelayedHit());
         }
 
        
@@ -83,6 +86,12 @@ public class FireController : MonoBehaviour {
 
                 hit = true;
 
+            BoardColor.material.SetColor("_EmissionColor", Green);
+
+        }
+        else
+        {
+            BoardColor.material.SetColor("_EmissionColor", Red);
         }
 
         //Debug.Log("Distance: " + CannonTilting.RANGE_DIFFERENCE + "  Angle: " + CannonTurning.ANGLE_TO_TARGET);
@@ -90,6 +99,33 @@ public class FireController : MonoBehaviour {
         return hit;
 
     }
+
+    IEnumerator DelayedHit()
+    {
+
+        DistantSound.PlayDelayed(2);
+
+        yield return new WaitForSeconds(DistantSound.clip.length);
+
+        BingSound.Play();
+
+        if (shotsFired < 3)
+        {
+
+            if (LanguageManager.CurrentLanguage == LanguageManager.Language.Danish)
+            {
+                HitMessageDK();
+            }
+            else
+            {
+                HitMessageEN();
+            }
+
+        }
+
+
+    }
+
 
     void HitMessageDK()
     {
@@ -106,7 +142,7 @@ public class FireController : MonoBehaviour {
         else
         {
 
-            texts[shotsFired].text = "Ramte " + Vector3.Distance(HitObject.transform.position, TargetObject.transform.position).ToString("F1") + " M forbi målet";
+            texts[shotsFired].text = "Ramte " + Vector3.Distance(HitObject.transform.position, TargetObject.transform.position).ToString("F1") + " M forbi";
 
         }
 
